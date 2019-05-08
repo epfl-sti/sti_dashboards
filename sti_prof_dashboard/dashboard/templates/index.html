@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
-{% block title%}Sample page{% endblock %}
+{% load staticfiles %}
+{% block title%}Introduction{% endblock %}
 {% block body_content%}
-<p>Hello World</p>
+
+<div class="container">
+    <div class="hero">
+        <div class="hero-content-container">
+        <h1 class="hero-title">STI school professors dashboards</h1>
+        </div>
+        <div class="hero-img">
+        <img src="{% static 'dashboard/img/image_largeprvw.jpeg' %}" alt="IMAGE DESCRIPTION HERE" class="img-fluid">
+        </div>
+    </div>
+</div>
+<div class="mt-5">
+  <p>
+    You will find a bird's eye view on the statistics related to your activities at STI. Dahboards on data such as the number of ECTS credits you taught can be found in the menu on the left hand side.
+  </p>
+</div>
+
 {% endblock %}
