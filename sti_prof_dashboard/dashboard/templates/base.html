@@ -2,15 +2,58 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="{% static 'dashboard/css/styles.css' %}">
-	</head>
-    <body>
-        {% block body_content%}{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <script src="{% static 'dashboard/js/script.js' %}"></script>
-    </body>
+    <title>{% block title %}Page Title{% endblock %}</title>
+
+    <!-- Elements CSS -->
+    <link rel="stylesheet" href="{% static 'epfl/elements/css/vendors.min.css' %}">
+    <link rel="stylesheet" href="{% static 'epfl/elements/css/base.css' %}">
+
+    <!-- Any custom CSS for the dashboard -->
+    <link rel="stylesheet" href="{% static 'dashboard/css/styles.css' %}">
+</head>
+
+<body>
+    <div>
+        <header role="banner" class="header">
+            {% include "_main_site_drawer.html" %}
+            {% include "_logo.html" %}
+            {% include "_top_nav.html" %}
+        </header>
+            <div class="main-container">
+            {% include "_breadcrumb.html" %}
+            <div>
+                {# ******************************************** Main content ********************************************#}
+                <div class="w-100 pb-5">
+                    <main id="main" role="main" class="content container-grid">
+                        {# See https://epfl-idevelop.github.io/elements/#/pages/layout-demo for a complete example of a page layout #}
+                        <div class="container">
+                            {% block body_content%}{% endblock %}
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ******************************************** Footer ********************************************#}
+    {% include "_footer.html" %}
+
+
+    <!-- jQuery through CDN is not already present -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!-- Elements JS -->
+    <script src="{% static 'epfl/elements/js/vendors.min.js' %}"></script>
+    <script src="{% static 'epfl/elements/js/vendors.bundle.js' %}"></script>
+    <script src="{% static 'epfl/elements/js/app.bundle.js' %}"></script>
+
+    <!-- Any custom script for the dasboard -->
+    <script src="{% static 'dashboard/js/script.js' %}"></script>
+</body>
+
 </html>
