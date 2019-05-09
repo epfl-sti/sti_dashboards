@@ -11,3 +11,11 @@ def index(request):
 def ECTS_credits_rankings(request):
     context = {'chart_name': 'STIfacultiesdashboard&#47;ECTScreditsrankings'}
     return render(request, 'tableau.html', context=context)
+
+def ECTS_credits_details(request):
+    context = {'chart_name' : 'STIfacultiesdashboard&#47;DetailednumberofECTScreditstaughtbyteacher'}
+    return render(request, 'tableau.html', context=context)
+
+def teaching_hours_rankings(request):
+    context = {'chart_name' : 'STIfacultiesdashboard&#47;Teachinghoursrankings'}
+    return render(request, 'tableau.html', context=context)

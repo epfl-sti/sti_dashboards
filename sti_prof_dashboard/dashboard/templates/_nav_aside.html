@@ -8,6 +8,8 @@
                 <a href="#">Teaching</a>
                 <ul>
                     <li {% if url_name == "ECTS_credits_rankings" %}class="active"{% endif %}><a href="{% url 'dashboard:ECTS_credits_rankings' %}">Rankings of ECTS credits</a></li>
+                    <li {% if url_name == "teaching_hours_rankings" %}class="active"{% endif %}><a href="{% url 'dashboard:teaching_hours_rankings' %}">Rankings of number of hours</a></li>
+                    <li {% if url_name == "ECTS_credits_details" %}class="active"{% endif %}><a href="{% url 'dashboard:ECTS_credits_details' %}">Details of ECTS credits and teaching hours</a></li>
                 </ul>
             </li>
         </ul>
