@@ -26,16 +26,16 @@
         </header>
             <div class="main-container">
             {% include "_breadcrumb.html" %}
-            <div>
+            <div class="nav-toggle-layout nav-aside-layout">
+                <div class="overlay"></div>
                 {# ******************************************** Main content ********************************************#}
                 <div class="w-100 pb-5">
                     <main id="main" role="main" class="content container-grid">
                         {# See https://epfl-idevelop.github.io/elements/#/pages/layout-demo for a complete example of a page layout #}
-
-                            {% block body_content%}{% endblock %}
-
+                        {% block body_content%}{% endblock %}
                     </main>
                 </div>
+                {% include "_nav_aside.html" %}
             </div>
         </div>
     </div>
