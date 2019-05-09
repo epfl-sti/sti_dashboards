@@ -8,6 +8,6 @@ from django.views.decorators.cache import cache_control
 def index(request):
     return render(request, 'index.html')
 
-def ECTS_credits_by_teacher(request):
-    context = {'chart_name': u'STIfacultiesdashboard&#47;TotalnumberofECTScreditstaughtbyteachersplitbyteacherrank'}
+def ECTS_credits_rankings(request):
+    context = {'chart_name': 'STIfacultiesdashboard&#47;ECTScreditsrankings'}
     return render(request, 'tableau.html', context=context)
