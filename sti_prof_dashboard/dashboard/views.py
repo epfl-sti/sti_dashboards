@@ -29,3 +29,8 @@ def teaching_hours_rankings(request):
 def finances(request):
     context = {'chart_name': 'STIfacultiesdashboard-SAPFI&#47;finances'}
     return render(request, 'tableau.html', context=context)
+
+
+def space_used(request):
+    context = {'chart_name': 'STIfacultiesdashboard-Archibus&#47;space'}
+    return render(request, 'tableau.html', context=context)

@@ -17,6 +17,11 @@
                     <li {% if url_name == "finances" %}class="active"{% endif %}><a href="{% url 'dashboard:finances' %}">Finances</a></li>
                 </ul>
             </li>
+            <li><a href="#">Campus</a>
+                <ul>
+                    <li {% if url_name == "space_used" %}class="active"{% endif %}><a href="{% url 'dashboard:space_used' %}">Space used</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </aside>
