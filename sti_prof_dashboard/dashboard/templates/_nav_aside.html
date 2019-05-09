@@ -3,11 +3,11 @@
     <nav id="nav-aside" class="nav-aside" role="navigation" aria-describedby="nav-aside-title">
         <h2 class="h5 sr-only-xl">On the same topic</h2>
         <ul>
-            <li {% if url_name == "index" %}class="active"{% endif %}><a href="{% url 'index' %}">About</a></li>
+            <li {% if url_name == "index" %}class="active"{% endif %}><a href="{% url 'dashboard:index' %}">About</a></li>
             <li>
                 <a href="#">Teaching</a>
                 <ul>
-                    <li {% if url_name == "ECTS_credits_by_teacher" %}class="active"{% endif %}><a href="{% url 'ECTS_credits_by_teacher' %}">ECTS credits taught</a></li>
+                    <li {% if url_name == "ECTS_credits_by_teacher" %}class="active"{% endif %}><a href="{% url 'dashboard:ECTS_credits_by_teacher' %}">ECTS credits taught</a></li>
                 </ul>
             </li>
         </ul>
