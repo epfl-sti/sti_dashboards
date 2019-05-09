@@ -12,6 +12,11 @@
                     <li {% if url_name == "ECTS_credits_details" %}class="active"{% endif %}><a href="{% url 'dashboard:ECTS_credits_details' %}">Details of ECTS credits and teaching hours</a></li>
                 </ul>
             </li>
+            <li><a href="#">Finances</a>
+                <ul>
+                    <li {% if url_name == "finances" %}class="active"{% endif %}><a href="{% url 'dashboard:finances' %}">Finances</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </aside>

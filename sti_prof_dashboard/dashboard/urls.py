@@ -6,7 +6,8 @@ app_name = "dashboard"
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('ECTS_rankings', views.ECTS_credits_rankings, name="ECTS_credits_rankings" ),
-    path('ECTS_credits_details', views.ECTS_credits_details, name="ECTS_credits_details" ),
-    path('teaching_hours_rankings', views.teaching_hours_rankings, name="teaching_hours_rankings"),
+    path('teaching/ECTS_rankings', views.ECTS_credits_rankings, name="ECTS_credits_rankings" ),
+    path('teaching/ECTS_credits_details', views.ECTS_credits_details, name="ECTS_credits_details" ),
+    path('teaching/teaching_hours_rankings', views.teaching_hours_rankings, name="teaching_hours_rankings"),
+    path('finance/finances', views.finances, name="finances"),
 ]
