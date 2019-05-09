@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title%}About{% endblock %}
+{% block body_content%}
+
+<div class="container">
+    <div class="hero">
+        <div class="hero-content-container">
+        <h1 class="hero-title">{{ title }}</h1>
+        </div>
+        <div class="hero-img">
+        <img src="{% static image_relative_path %}" alt="{{ title }}" class="img-fluid">
+        </div>
+    </div>
+</div>
+<div class="mt-5">
+  <p>
+    {{ details }}
+  </p>
+</div>
+
+{% endblock %}

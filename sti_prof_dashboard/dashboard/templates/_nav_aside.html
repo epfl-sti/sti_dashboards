@@ -4,20 +4,19 @@
         <h2 class="h5 sr-only-xl">On the same topic</h2>
         <ul>
             <li {% if url_name == "index" %}class="active"{% endif %}><a href="{% url 'dashboard:index' %}">About</a></li>
-            <li>
-                <a href="#">Teaching</a>
+            <li {% if url_name == "teaching" %}class="active"{% endif %}><a href="{% url 'dashboard:teaching' %}">Teaching</a>
                 <ul>
                     <li {% if url_name == "ECTS_credits_rankings" %}class="active"{% endif %}><a href="{% url 'dashboard:ECTS_credits_rankings' %}">Rankings of ECTS credits</a></li>
                     <li {% if url_name == "teaching_hours_rankings" %}class="active"{% endif %}><a href="{% url 'dashboard:teaching_hours_rankings' %}">Rankings of number of hours</a></li>
                     <li {% if url_name == "ECTS_credits_details" %}class="active"{% endif %}><a href="{% url 'dashboard:ECTS_credits_details' %}">Details of ECTS credits and teaching hours</a></li>
                 </ul>
             </li>
-            <li><a href="#">Finances</a>
+            <li {% if url_name == "finance" %}class="active"{% endif %}><a href="{% url 'dashboard:finance' %}">Finance</a>
                 <ul>
                     <li {% if url_name == "finances" %}class="active"{% endif %}><a href="{% url 'dashboard:finances' %}">Finances</a></li>
                 </ul>
             </li>
-            <li><a href="#">Campus</a>
+            <li {% if url_name == "campus" %}class="active"{% endif %}><a href="{% url 'dashboard:campus' %}">Campus</a>
                 <ul>
                     <li {% if url_name == "space_used" %}class="active"{% endif %}><a href="{% url 'dashboard:space_used' %}">Space used</a></li>
                 </ul>
