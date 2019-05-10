@@ -9,7 +9,7 @@ from django.views.decorators.cache import cache_control
 def index(request):
     context = {
         'image_relative_path': 'dashboard/img/image_largeprvw.jpeg',
-        'title': 'STI faculties dashboards',
+        'title': 'STI dashboards',
         'details': "You will find a bird's eye view on the statistics related to your activities at STI. Dashboards on data such as the number of ECTS credits you taught can be found in the menu on the left hand side."}
     return render(request, 'generic_section_page.html', context=context)
 
