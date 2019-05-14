@@ -13,3 +13,14 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DJANGO_POSTGRES_DB_NAME', 'sti_dashboards'),
+        'USER': os.environ.get('DJANGO_POSTGRES_USERNAME', 'django'),
+        'PASSWORD': os.environ.get('DJANGO_POSTGRES_PASSWORD', 'changeMe!'),
+        'HOST': os.environ.get('DJANGO_POSTGRES_HOSTNAME', 'localhost'),
+        'PORT': '',
+    }
+}
