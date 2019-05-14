@@ -1,5 +1,6 @@
 venv/
 .envrc
+.env
 **/*.pyc
 **/__pycache__
 **/*.sqlite3
