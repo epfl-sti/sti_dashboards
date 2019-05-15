@@ -3,3 +3,4 @@ python-dotenv
 python-memcached
 postgres
 psycopg2-binary
+gunicorn
