@@ -1,8 +1,9 @@
 from .base import *
 import os
+import distutils.util
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG') or False
+DEBUG = distutils.util.strtobool(os.environ.get('DJANGO_DEBUG')) or False
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
 
