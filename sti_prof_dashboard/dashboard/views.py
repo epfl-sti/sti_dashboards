@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 from django.views.decorators.cache import cache_control
+from django.conf import settings
+from django.shortcuts import redirect
 
 
 @cache_page(60 * 15)
@@ -17,6 +19,9 @@ def index(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def ECTS_credits_rankings(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+
     context = {'chart_name': 'STIfacultiesdashboard&#47;ECTScreditsrankings'}
     return render(request, 'tableau.html', context=context)
 
@@ -24,6 +29,9 @@ def ECTS_credits_rankings(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def ECTS_credits_details(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+
     context = {
         'chart_name': 'STIfacultiesdashboard&#47;DetailednumberofECTScreditstaughtbyteacher'}
     return render(request, 'tableau.html', context=context)
@@ -32,6 +40,9 @@ def ECTS_credits_details(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def teaching_hours_rankings(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+
     context = {'chart_name': 'STIfacultiesdashboard&#47;Teachinghoursrankings'}
     return render(request, 'tableau.html', context=context)
 
@@ -39,6 +50,9 @@ def teaching_hours_rankings(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def finances(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+
     context = {'chart_name': 'STIfacultiesdashboard-SAPFI&#47;finances'}
     return render(request, 'tableau.html', context=context)
 
@@ -46,6 +60,9 @@ def finances(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def space_used(request):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+
     context = {'chart_name': 'STIfacultiesdashboard-Archibus&#47;space'}
     return render(request, 'tableau.html', context=context)
 

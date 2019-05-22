@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +51,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_tequila.middleware.TequilaMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = ('django_tequila.django_backend.TequilaBackend',)
+
+TEQUILA_SERVICE_NAME = "STI dashboards"
+LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_URL = "/"
+LOGIN_REDIRECT_IF_NOT_ALLOWED = "/not_allowed"
+LOGIN_REDIRECT_TEXT_IF_NOT_ALLOWED  = "Not allowed"
 
 ROOT_URLCONF = 'sti_prof_dashboard.urls'
 

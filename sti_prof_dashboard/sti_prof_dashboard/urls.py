@@ -17,7 +17,11 @@ Including another URLconf
 from django.urls import include, path
 from django.contrib import admin
 
+from django_tequila.urls import urlpatterns as django_tequila_urlpatterns
+
 urlpatterns = [
     path('', include('dashboard.urls')),
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += django_tequila_urlpatterns
