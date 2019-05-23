@@ -57,6 +57,7 @@ MIDDLEWARE = [
 AUTHENTICATION_BACKENDS = ('django_tequila.django_backend.TequilaBackend',)
 
 TEQUILA_SERVICE_NAME = "STI dashboards"
+TEQUILA_CLEAN_URL = True
 LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_URL = "/"
