@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title%}Introduction{% endblock %}
+{% block body_content%}
+<div class="container">
+    <div id="controls" style="padding:20px;">
+        {% comment %} Year: <select id="changeYear" onchange="yearFilter(value);">
+        <option value="">All</option>
+        <option value="2013-2014">2013-2014</option>
+        <option value="2014-2015">2014-2015</option>
+        <option value="2015-2016">2015-2016</option>
+        <option value="2016-2017">2016-2017</option>
+        <option value="2017-2018">2017-2018</option>
+        </select> {% endcomment %}
+        <button onclick="selectSingleRank('{{ current_user.sciper }}');">Highlight my ranking</button>
+        <button onclick="selectMultipleRanks();">Highlight rankings of people I manage</button>
+        <button onclick="clearRankSelection();">Clear highlight(s)</button>
+    </div>
+    <div id="vizContainer" style="height:900px;"></div>
+
+</div>
+{% endblock %}
+
+{% block scripts_end_of_page_content %}
+<script type="text/javascript"
+	    src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+<script type="text/javascript">
+    var viz, sheet;
+
+    var sciper='{{ current_user.sciper|safe }}'
+    var managed_scipers = {{ managed_scipers|safe }}
+
+        function initViz() {
+            var containerDiv = document.getElementById("vizContainer"),
+                url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/Teachinghoursrankings",
+                options = {
+                    "Year": "",
+                    hideTabs: true,
+                    hideToolbar: true,
+                    onFirstInteractive: function () {
+                        sheet = viz.getWorkbook().getActiveSheet();
+                        clearRankSelection()
+                    }
+                };
+
+            viz = new tableau.Viz(containerDiv, url, options);
+        }
+
+        {% comment %} function yearFilter(year) {
+            if (year === "") {
+                sheet.clearFilterAsync("Year");
+            } else {
+                sheet.applyFilterAsync("Year", year, tableau.FilterUpdateType.REPLACE);
+            }
+        } {% endcomment %}
+
+        function selectSingleRank(sciper){
+            sheet.selectMarksAsync("SCIPER", sciper, tableau.SelectionUpdateType.REPLACE);
+        }
+
+        function selectMultipleRanks(){
+            sheet.selectMarksAsync("SCIPER", managed_scipers, tableau.SelectionUpdateType.REPLACE)
+        }
+
+        function clearRankSelection() {
+            sheet.selectMarksAsync();
+        }
+
+
+    $(document).ready(function(){
+        console.log("current_user (username): {{ current_user.username|safe }}")
+        console.log("current_user (sciper): {{ current_user.sciper|safe }}")
+        console.log("managed scipers: {{ managed_scipers|safe }}")
+        initViz()
+    })
+    </script>
+{% endblock%}

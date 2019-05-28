@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title%}Introduction{% endblock %}
+{% block body_content%}
+<div class="container">
+    <div id="vizContainer" style="height:900px;"></div>
+
+</div>
+{% endblock %}
+
+{% block scripts_end_of_page_content %}
+<script type="text/javascript"
+	    src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+<script type="text/javascript">
+    var viz, sheet;
+
+    var sciper='{{ current_user.sciper|safe }}'
+    var managed_scipers = {{ managed_scipers|safe }}
+
+    function initViz() {
+        var containerDiv = document.getElementById("vizContainer"),
+            url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/DetailednumberofECTScreditstaughtbyteacher",
+            options = {
+                "Year": "",
+                hideTabs: true,
+                hideToolbar: true,
+                onFirstInteractive: function () {
+                    sheet = viz.getWorkbook().getActiveSheet();
+                    sheet.applyFilterAsync("SCIPER", managed_scipers, tableau.FilterUpdateType.REPLACE);
+                }
+            };
+
+        viz = new tableau.Viz(containerDiv, url, options);
+    }
+
+    $(document).ready(function(){
+        console.log("current_user (username): {{ current_user.username|safe }}")
+        console.log("current_user (sciper): {{ current_user.sciper|safe }}")
+        console.log("managed scipers: {{ managed_scipers|safe }}")
+        initViz()
+    })
+    </script>
+{% endblock%}

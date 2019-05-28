@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title%}Introduction{% endblock %}
+{% block body_content%}
+<div class="container">
+    <p>Username: {{ current_user.username }}</p>
+    <p>Sciper: {{ current_user.sciper }}</p>
+    <p>First name: {{ current_user.firstname }}</p>
+    <p>Last name: {{ current_user.lastname }}</p>
+    <p>Display name: {{ current_user.displayName }}</p>
+    <p>Managed units ({{ managed_units|length }}):
+        <ul>
+        {% for unit in managed_units %}
+        <li>{{ unit.CN }} - {{ unit.Description }}</li>
+        {% endfor %}
+        </ul>
+    </p>
+    <p>Managed persons ({{ managed_persons|length }}):
+        <ul>
+        {% for person in managed_persons %}
+            <li>{{ person.displayName }} ({{ person.sciper }})</li>
+        {% endfor %}
+        </ul>
+    </p>
+{% endblock %}
+

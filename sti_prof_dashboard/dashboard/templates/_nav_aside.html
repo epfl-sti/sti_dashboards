@@ -13,7 +13,7 @@
             </li>
             <li {% if url_name == "finance" %}class="active"{% endif %}><a href="{% url 'dashboard:finance' %}">Finance</a>
                 <ul>
-                    <li {% if url_name == "finances" %}class="active"{% endif %}><a href="{% url 'dashboard:finances' %}">Finances</a></li>
+                    <li {% if url_name == "budgets" %}class="active"{% endif %}><a href="{% url 'dashboard:budgets' %}">Budgets</a></li>
                 </ul>
             </li>
             <li {% if url_name == "campus" %}class="active"{% endif %}><a href="{% url 'dashboard:campus' %}">Campus</a>
