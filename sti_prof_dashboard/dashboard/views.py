@@ -27,10 +27,16 @@ def ECTS_credits_rankings(request):
 
     # Gives a mean to impersonate a user based on a cookie value
     username = get_impersonated_user(request)
+    if username == "asayed":
+        viz_url = 'https://tableau.epfl.ch/views/STIfacultiesdashboard/ECTScreditsrankingsDean'
+    else:
+        viz_url = 'https://tableau.epfl.ch/views/STIfacultiesdashboard/ECTScreditsrankings'
+
     current_user, managed_units, managed_persons = get_context_data(username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     context = {
+        'viz_url': viz_url,
         'current_user': current_user,
         'managed_units': managed_units,
         'managed_scipers': managed_scipers
@@ -47,10 +53,16 @@ def ECTS_credits_details(request):
 
     # Gives a mean to impersonate a user based on a cookie value
     username = get_impersonated_user(request)
+    if username == 'asayed':
+        viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/DetailednumberofECTScreditstaughtbyteacherDean"
+    else:
+        viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/DetailednumberofECTScreditstaughtbyteacherblankstart"
+
     current_user, managed_units, managed_persons = get_context_data(username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     context = {
+        'viz_url': viz_url,
         'current_user': current_user,
         'managed_units': managed_units,
         'managed_scipers': managed_scipers
@@ -68,10 +80,16 @@ def teaching_hours_rankings(request):
 
     # Gives a mean to impersonate a user based on a cookie value
     username = get_impersonated_user(request)
+    if username == "asayed":
+        viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/TeachinghoursrankingsDean"
+    else:
+        viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/Teachinghoursrankings"
+
     current_user, managed_units, managed_persons = get_context_data(username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     context = {
+        'viz_url': viz_url,
         'current_user': current_user,
         'managed_units': managed_units,
         'managed_scipers': managed_scipers
@@ -89,12 +107,18 @@ def budgets(request):
 
     # Gives a mean to impersonate a user based on a cookie value
     username = get_impersonated_user(request)
+    if username == "asayed":
+        viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard-SAPFIBudgets/Unitsbudget"
+    else:
+        viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard-SAPFIBudgets/Unitsbudgetblankstart"
+
     current_user, managed_units, managed_persons = get_context_data(username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     managed_units = [str.upper(unit.CN) for unit in managed_units]
 
     context = {
+        'viz_url': viz_url,
         'current_user': current_user,
         'managed_units': managed_units,
         'managed_scipers': managed_scipers
