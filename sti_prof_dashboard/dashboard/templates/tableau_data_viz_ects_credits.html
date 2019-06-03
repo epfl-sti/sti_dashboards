@@ -3,11 +3,13 @@
 {% block title%}Introduction{% endblock %}
 {% block body_content%}
 <div class="container">
+    {% if not user_is_dean %}
     <div id="controls" style="padding:20px;">
         <button onclick="selectSingleRank('{{ current_user.sciper }}');">Highlight my ranking</button>
         <button onclick="selectMultipleRanks();">Highlight rankings of people I manage</button>
         <button onclick="clearRankSelection();">Clear highlight(s)</button>
     </div>
+    {% endif %}
     <div id="vizContainer" style="height:900px;"></div>
 
 </div>
@@ -47,10 +49,13 @@
         } {% endcomment %}
 
         function selectSingleRank(sciper){
+            console.log("Selecting marks for sciper '" + sciper + "'...")
             sheet.selectMarksAsync("SCIPER", sciper, tableau.SelectionUpdateType.REPLACE);
+            console.log("Done")
         }
 
         function selectMultipleRanks(){
+            console.log("Selecting marks for scipers: " + scipers)
             sheet.selectMarksAsync("SCIPER", managed_scipers, tableau.SelectionUpdateType.REPLACE)
         }
 

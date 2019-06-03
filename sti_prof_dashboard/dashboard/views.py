@@ -28,14 +28,17 @@ def ECTS_credits_rankings(request):
     # Gives a mean to impersonate a user based on a cookie value
     username = get_impersonated_user(request)
     if username == "asayed":
+        user_is_dean = True
         viz_url = 'https://tableau.epfl.ch/views/STIfacultiesdashboard/ECTScreditsrankingsDean'
     else:
+        user_is_dean = False
         viz_url = 'https://tableau.epfl.ch/views/STIfacultiesdashboard/ECTScreditsrankings'
 
     current_user, managed_units, managed_persons = get_context_data(username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     context = {
+        'user_is_dean': user_is_dean,
         'viz_url': viz_url,
         'current_user': current_user,
         'managed_units': managed_units,
@@ -81,14 +84,17 @@ def teaching_hours_rankings(request):
     # Gives a mean to impersonate a user based on a cookie value
     username = get_impersonated_user(request)
     if username == "asayed":
+        user_is_dean = True
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/TeachinghoursrankingsDean"
     else:
+        user_is_dean = False
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/Teachinghoursrankings"
 
     current_user, managed_units, managed_persons = get_context_data(username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     context = {
+        'user_is_dean': user_is_dean,
         'viz_url': viz_url,
         'current_user': current_user,
         'managed_units': managed_units,
