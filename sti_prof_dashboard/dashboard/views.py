@@ -20,13 +20,7 @@ def index(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def ECTS_credits_rankings(request):
-
-    # Default behaviour to make sure the person is authenticated
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-
-    # Gives a mean to impersonate a user based on a cookie value
-    username = get_impersonated_user(request)
+    username = request.user.username
     if username == "asayed":
         user_is_dean = True
         viz_url = 'https://tableau.epfl.ch/views/STIfacultiesdashboard/ECTScreditsrankingsDean'
@@ -50,12 +44,7 @@ def ECTS_credits_rankings(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def ECTS_credits_details(request):
-    # Default behaviour to make sure the person is authenticated
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-
-    # Gives a mean to impersonate a user based on a cookie value
-    username = get_impersonated_user(request)
+    username = request.user.username
     if username == 'asayed':
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/DetailednumberofECTScreditstaughtbyteacherDean"
     else:
@@ -76,13 +65,7 @@ def ECTS_credits_details(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def teaching_hours_rankings(request):
-
-    # Default behaviour to make sure the person is authenticated
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-
-    # Gives a mean to impersonate a user based on a cookie value
-    username = get_impersonated_user(request)
+    username = request.user.username
     if username == "asayed":
         user_is_dean = True
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/TeachinghoursrankingsDean"
@@ -106,13 +89,7 @@ def teaching_hours_rankings(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def budgets(request):
-
-    # Default behaviour to make sure the person is authenticated
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-
-    # Gives a mean to impersonate a user based on a cookie value
-    username = get_impersonated_user(request)
+    username = request.user.username
     if username == "asayed":
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard-SAPFIBudgets/Unitsbudget"
     else:
@@ -135,13 +112,7 @@ def budgets(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def space_used(request):
-
-    # Default behaviour to make sure the person is authenticated
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-
-    # Gives a mean to impersonate a user based on a cookie value
-    username = get_impersonated_user(request)
+    username = request.user.username
     current_user, managed_units, managed_persons = get_context_data(username)
     managed_scipers = [person.sciper for person in managed_persons]
 
@@ -185,13 +156,6 @@ def finance_sub_section(request):
     return render(request, 'generic_section_page.html', context=context)
 
 
-def get_impersonated_user(request):
-    if request.COOKIES.get('impersonate', '') != '' and settings.DEBUG:
-        return request.COOKIES.get('impersonate', '')
-    else:
-        return request.user.username
-
-
 def get_context_data(username):
     current_user = epfl_ldap.get_person_details(username)
     managed_units = epfl_ldap.get_managed_units(current_user.sciper)
@@ -205,13 +169,7 @@ def get_context_data(username):
 
 
 def test_tableau_viz(request):
-
-    # Default behaviour to make sure the person is authenticated
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-
-    # Gives a mean to impersonate a user based on a cookie value
-    username = get_impersonated_user(request)
+    username = request.user.username
     current_user, managed_units, managed_persons = get_context_data(username)
     managed_scipers = [person.sciper for person in managed_persons]
 
@@ -224,13 +182,7 @@ def test_tableau_viz(request):
 
 
 def test_ldap(request):
-
-    # Default behaviour to make sure the person is authenticated
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-
-    # Gives a mean to impersonate a user based on a cookie value
-    username = get_impersonated_user(request)
+    username = request.user.username
     current_user, managed_units, managed_persons = get_context_data(username)
 
     context = {

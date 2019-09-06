@@ -52,10 +52,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_tequila.middleware.TequilaMiddleware',
+    'epfl.sti.middlewares.authentication.LoginRequiredMiddleware',
+    'epfl.sti.middlewares.authentication.ImpersonationMiddleware',
 ]
 
-AUTHENTICATION_BACKENDS = ('django_tequila.django_backend.TequilaBackend',)
+AUTHENTICATION_BACKENDS = (
+    'django_tequila.django_backend.TequilaBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    )
 
+# Tequila related configuration
 TEQUILA_SERVICE_NAME = "STI dashboards"
 TEQUILA_CLEAN_URL = True
 LOGIN_URL = "/login"
@@ -63,6 +69,12 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_URL = "/"
 LOGIN_REDIRECT_IF_NOT_ALLOWED = "/not_allowed"
 LOGIN_REDIRECT_TEXT_IF_NOT_ALLOWED  = "Not allowed"
+
+# Authentication middleware configuration
+LOGIN_EXEMPT_URLS = (
+    r'^login/$',
+    r'^logout/$',
+)
 
 ROOT_URLCONF = 'sti_prof_dashboard.urls'
 
