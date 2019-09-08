@@ -18,3 +18,16 @@
         <a class="nav-item" href="https://www.epfl.ch/campus/" target="_blank">Campus</a>
     </li>
 </ul>
+<nav class="nav-lang nav-lang-short ml-auto">
+    <div class="avatar-teaser">
+        {%comment %}TODO: put link to sciper when available {% endcomment %}
+        <a class="avatar-teaser-img-placeholder" href="#">
+            {% comment %} TODO: Find the correct way to generate the image path {% endcomment %}
+            {% comment %} <img src="https://sti.epfl.ch/wp-content/uploads/2018/01/sayed-1.png"> {% endcomment %}
+        </a>
+    <div class="avatar-teaser-body">
+        <p>{{ request.user.last_name }}, {{ request.user.first_name|truncatewords:1 }}</p>
+    </div>
+    </div>
+</nav>
+
