@@ -6,17 +6,38 @@
 <div class="container">
     <div class="hero">
         <div class="hero-content-container">
-        <h1 class="hero-title">{{ title }}</h1>
+          <h1 class="hero-title">{{ title }}</h1>
+          <div class="hero-content">
+            {{ details }}
+          </div>
         </div>
+
         <div class="hero-img">
-        <img src="{% static image_relative_path %}" alt="{{ title }}" class="img-fluid">
+          <picture>
+            <source media="(min-width: 1140px)" srcset="{% static image_relative_path %} 1x,{% static image_relative_path %} 2x">
+            <source media="(min-width: 960px)" srcset="{% static image_relative_path %} 1x,{% static image_relative_path %} 2x">
+            <source media="(min-width: 720px)" srcset="{% static image_relative_path %} 1x,{% static image_relative_path %} 2x">
+            <source media="(min-width: 541px)" srcset="{% static image_relative_path %} 1x,{% static image_relative_path %} 2x">
+            <source media="(max-width: 540px)" srcset="{% static image_relative_path %} 1x,{% static image_relative_path %} 2x">
+            <img src="{% static image_relative_path %}" alt="{{ title }}" class="img-fluid">
+          </picture>
         </div>
     </div>
-</div>
-<div class="mt-5">
-  <p>
-    {{ details }}
-  </p>
-</div>
 
+    <div class="mt-5">&nbsp;</div>
+
+      {% ifnotequal nextsteps|length 0 %}
+      <h4>Further readings</h4>
+
+        {% for item in nextsteps %}
+          <button class="collapse-title collapse-title-desktop collapsed" type="button" data-toggle="collapse" data-target="#collapse-{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse-{{ forloop.counter }}">
+            <a href="{{ item.link }}" >{{ item.title }}</a>
+          </button>
+
+          <div class="collapse collapse-item collapse-item-desktop" id="collapse-{{ forloop.counter }}">
+            <p>{{  item.description }}</p>
+          </div>
+        {% endfor %}
+      {% endifnotequal %}
+</div>
 {% endblock %}

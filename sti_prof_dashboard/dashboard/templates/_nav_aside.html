@@ -16,6 +16,8 @@
                     <li {% if url_name == "budgets" %}class="active"{% endif %}><a href="{% url 'dashboard:budgets' %}">Budgets</a></li>
                 </ul>
             </li>
+            <li {% if url_name == "hr" %}class="active"{% endif %}><a href="{% url 'dashboard:hr' %}">Human resources</a></li>
+            </li>
             <li {% if url_name == "campus" %}class="active"{% endif %}><a href="{% url 'dashboard:campus' %}">Campus</a>
                 <ul>
                     <li {% if url_name == "space_used" %}class="active"{% endif %}><a href="{% url 'dashboard:space_used' %}">Space used</a></li>

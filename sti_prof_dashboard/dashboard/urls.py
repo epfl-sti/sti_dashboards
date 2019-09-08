@@ -15,6 +15,7 @@ urlpatterns = [
          views.teaching_hours_rankings, name="teaching_hours_rankings"),
     path('finance', views.finance_sub_section, name="finance"),
     path('finance/budgets', views.budgets, name="budgets"),
+    path('hr', views.hr_sub_section, name="hr"),
     path('campus', views.campus_sub_section, name="campus"),
     path('campus/space_used', views.space_used, name="space_used"),
 #     path('test_viz', views.test_tableau_viz, name="test_viz"),
