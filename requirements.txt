@@ -7,3 +7,5 @@ gunicorn
 django-sslserver
 django-debug-toolbar
 ldap3
+django-url-or-relative-url-field
+

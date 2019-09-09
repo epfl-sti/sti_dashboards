@@ -20,10 +20,8 @@
 </ul>
 <nav class="nav-lang nav-lang-short ml-auto">
     <div class="avatar-teaser">
-        {%comment %}TODO: put link to sciper when available {% endcomment %}
-        <a class="avatar-teaser-img-placeholder" href="#">
-            {% comment %} TODO: Find the correct way to generate the image path {% endcomment %}
-            {% comment %} <img src="https://sti.epfl.ch/wp-content/uploads/2018/01/sayed-1.png"> {% endcomment %}
+        <a class="avatar-teaser-img-placeholder" href="https://people.epfl.ch/{{ request.user.sciper }}" target="_blank">
+            <img src="{{ request.user.picture_url|default_if_none:'/static/dashboard/img/user.png' }}">
         </a>
     <div class="avatar-teaser-body">
         <p>{{ request.user.last_name }}, {{ request.user.first_name|truncatewords:1 }}</p>
