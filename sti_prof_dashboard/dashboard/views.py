@@ -49,19 +49,16 @@ def index(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def ECTS_credits_rankings(request):
-    username = request.user.username
-    if username == "asayed":
-        user_is_dean = True
+    if request.user.is_dean:
         viz_url = 'https://tableau.epfl.ch/views/STIfacultiesdashboard/ECTScreditsrankingsDean'
     else:
-        user_is_dean = False
         viz_url = 'https://tableau.epfl.ch/views/STIfacultiesdashboard/ECTScreditsrankings'
 
-    current_user, managed_units, managed_persons = get_context_data(username)
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     context = {
-        'user_is_dean': user_is_dean,
+        'user_is_dean': request.user.is_dean,
         'viz_url': viz_url,
         'current_user': current_user,
         'managed_units': managed_units,
@@ -73,13 +70,12 @@ def ECTS_credits_rankings(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def ECTS_credits_details(request):
-    username = request.user.username
-    if username == 'asayed':
+    if request.user.is_dean:
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/DetailednumberofECTScreditstaughtbyteacherDean"
     else:
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/DetailednumberofECTScreditstaughtbyteacherblankstart"
 
-    current_user, managed_units, managed_persons = get_context_data(username)
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     context = {
@@ -94,19 +90,16 @@ def ECTS_credits_details(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def teaching_hours_rankings(request):
-    username = request.user.username
-    if username == "asayed":
-        user_is_dean = True
+    if request.user.is_dean:
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/TeachinghoursrankingsDean"
     else:
-        user_is_dean = False
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard/Teachinghoursrankings"
 
-    current_user, managed_units, managed_persons = get_context_data(username)
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     context = {
-        'user_is_dean': user_is_dean,
+        'user_is_dean': request.user.is_dean,
         'viz_url': viz_url,
         'current_user': current_user,
         'managed_units': managed_units,
@@ -118,13 +111,12 @@ def teaching_hours_rankings(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def budgets(request):
-    username = request.user.username
-    if username == "asayed":
+    if request.user.is_dean:
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard-SAPFIBudgets/Unitsbudget"
     else:
         viz_url = "https://tableau.epfl.ch/views/STIfacultiesdashboard-SAPFIBudgets/Unitsbudgetblankstart"
 
-    current_user, managed_units, managed_persons = get_context_data(username)
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
     managed_scipers = [person.sciper for person in managed_persons]
 
     managed_units = [str.upper(unit.CN) for unit in managed_units]
@@ -141,10 +133,8 @@ def budgets(request):
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
 def space_used(request):
-    username = request.user.username
-    current_user, managed_units, managed_persons = get_context_data(username)
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
     managed_scipers = [person.sciper for person in managed_persons]
-
     managed_units = [str.upper(unit.CN) for unit in managed_units]
 
     context = {
