@@ -1,13 +1,11 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseServerError
-from django.views.decorators.cache import cache_page
-from django.views.decorators.cache import cache_control
 from django.conf import settings
-from django.shortcuts import redirect
+from django.http import HttpResponse, HttpResponseServerError
+from django.shortcuts import redirect, render
 from django.urls import reverse
-from epfl.sti.helpers import ldap as epfl_ldap
+from django.views.decorators.cache import cache_control, cache_page
 
 from dashboard.models import NextStep
+from epfl.sti.helpers import ldap as epfl_ldap
 
 
 @cache_page(60 * 15)
@@ -196,28 +194,3 @@ def get_context_data(username):
         managed_persons.append(current_user)
 
     return current_user, managed_units, managed_persons
-
-
-def test_tableau_viz(request):
-    username = request.user.username
-    current_user, managed_units, managed_persons = get_context_data(username)
-    managed_scipers = [person.sciper for person in managed_persons]
-
-    context = {
-        'current_user': current_user,
-        'managed_units': managed_units,
-        'managed_scipers': managed_scipers
-    }
-    return render(request, 'test_tableau_data_viz.html', context=context)
-
-
-def test_ldap(request):
-    username = request.user.username
-    current_user, managed_units, managed_persons = get_context_data(username)
-
-    context = {
-        'current_user': current_user,
-        'managed_units': managed_units,
-        'managed_persons': managed_persons
-    }
-    return render(request, 'test_ldap.html', context=context)
