@@ -145,6 +145,278 @@ def space_used(request):
 
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
+def area_per_academic_rank_and_manager_bar(request):
+    viz_url = "https://tableau.epfl.ch/views/areas/Areaperacademicrankandmanagerbar"
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def area_per_faculty_institute_unit_treemap(request):
+    viz_url = 'https://tableau.epfl.ch/views/areas/Areaperfacultyinstituteunittreemap'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def area_per_faculty_institute_unit_table(request):
+    viz_url = 'https://tableau.epfl.ch/views/areas/Areaperfacultyinstituteunittable'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def area_per_academic_rank_and_manager_treemap(request):
+    viz_url = 'https://tableau.epfl.ch/views/areas/Areaperacademicrankandmanagertreemap'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def area_per_academic_rank_table(request):
+    viz_url = 'https://tableau.epfl.ch/views/areas/Areaperacademicranktable'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def hr_sti_gender_mix_pie(request):
+    viz_url = 'https://tableau.epfl.ch/views/Menwomenmixperinstitute/STIgendermixpie'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def men_women_mix_per_institute_bars(request):
+    viz_url = 'https://tableau.epfl.ch/views/Menwomenmixperinstitute/MenWomenmixperinstitutestackedbars'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def men_women_mix_per_institute_treemap(request):
+    viz_url = 'https://tableau.epfl.ch/views/Menwomenmixperinstitute/MenWomenmixperinstitutetreemap'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def men_women_mix_per_institute_table(request):
+    viz_url = 'https://tableau.epfl.ch/views/Menwomenmixperinstitute/MenWomenmixperinstitutetable'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def men_women_mix_per_epf_function_treemap(request):
+    viz_url = 'https://tableau.epfl.ch/views/stigendermixperEPFfunction/STIgendermixperfunctiontreemap'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def men_women_mix_per_epf_function_stacked(request):
+    viz_url = 'https://tableau.epfl.ch/views/stigendermixperEPFfunction/STIgendermixperfunctionstackedbar'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def men_women_mix_per_epf_function_table(request):
+    viz_url = 'https://tableau.epfl.ch/views/stigendermixperEPFfunction/STIgendermixperfunctiontable'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def fte_per_institute_treemap(request):
+    viz_url = 'https://tableau.epfl.ch/views/FTEheadcountperinstitutemanagerunitandtype/FTEperinstitutetreemap'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def fte_per_academic_rank_and_manager_treemap(request):
+    viz_url = 'https://tableau.epfl.ch/views/FTEheadcountperinstitutemanagerunitandtype/FTEperacademicrankingandmanagersnametreemap'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def fte_per_academic_rank_and_manager_table(request):
+    viz_url = 'https://tableau.epfl.ch/views/FTEheadcountperinstitutemanagerunitandtype/FTEperacademicrankingandmanagersnametable'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def fte_hc_per_institute_manager_unit_contract_type_bar(request):
+    viz_url = 'https://tableau.epfl.ch/views/FTEheadcountperinstitutemanagerunitandtype/FTEheadcountperinstitutemanagerunitandtypebarchart'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+def fte_hc_per_institute_manager_unit_contract_type_table(request):
+    viz_url = 'https://tableau.epfl.ch/views/FTEheadcountperinstitutemanagerunitandtype/FTEheadcountperinstitutemanagerunitandtypetable'
+    current_user, managed_units, managed_persons = get_context_data(request.user.username)
+    managed_scipers = [person.sciper for person in managed_persons]
+    managed_units = [str.upper(unit.CN) for unit in managed_units]
+    context = {
+        'viz_url': viz_url,
+        'current_user': current_user,
+        'managed_units': managed_units,
+        'managed_scipers': managed_scipers
+    }
+    return render(request, 'tableau_data_viz_area_per_academic_rank_and_manager_bar.html', context)
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
 def campus_sub_section(request):
     context = {
         'image_relative_path': 'dashboard/img/sven-mieke-1162927-unsplash.jpg',

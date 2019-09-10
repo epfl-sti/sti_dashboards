@@ -17,10 +17,29 @@
                 </ul>
             </li>
             <li {% if url_name == "hr" %}class="active"{% endif %}><a href="{% url 'dashboard:hr' %}">Human resources</a></li>
+                <ul>
+                    <li {% if url_name == "hr_sti_gender_mix_pie" %}class="active"{% endif %}><a href="{% url 'dashboard:hr_sti_gender_mix_pie' %}">Gender mix</a></li>
+                    <li {% if url_name == "men_women_mix_per_institute_bars" %}class="active"{% endif %}><a href="{% url 'dashboard:men_women_mix_per_institute_bars' %}">Men women mix per institute (stacked bars)</a></li>
+                    <li {% if url_name == "men_women_mix_per_institute_treemap" %}class="active"{% endif %}><a href="{% url 'dashboard:men_women_mix_per_institute_treemap' %}">Men women mix per institute (treemap)</a></li>
+                    <li {% if url_name == "men_women_mix_per_institute_table" %}class="active"{% endif %}><a href="{% url 'dashboard:men_women_mix_per_institute_table' %}">Men women mix per institute (table)</a></li>
+                    <li {% if url_name == "men_women_mix_per_epf_function_treemap" %}class="active"{% endif %}><a href="{% url 'dashboard:men_women_mix_per_epf_function_treemap' %}">STI gender mix per EPF function (treemap)</a></li>
+                    <li {% if url_name == "men_women_mix_per_epf_function_stacked" %}class="active"{% endif %}><a href="{% url 'dashboard:men_women_mix_per_epf_function_stacked' %}">STI gender mix per EPF function (stacked)</a></li>
+                    <li {% if url_name == "men_women_mix_per_epf_function_table" %}class="active"{% endif %}><a href="{% url 'dashboard:men_women_mix_per_epf_function_table' %}">STI gender mix per EPF function (table)</a></li>
+                    <li {% if url_name == "fte_per_institute_treemap" %}class="active"{% endif %}><a href="{% url 'dashboard:fte_per_institute_treemap' %}">FTE per institute (treemap)</a></li>
+                    <li {% if url_name == "fte_per_academic_rank_and_manager_treemap" %}class="active"{% endif %}><a href="{% url 'dashboard:fte_per_academic_rank_and_manager_treemap' %}">FTE per academic rank and manager (treemap)</a></li>
+                    <li {% if url_name == "fte_per_academic_rank_and_manager_table" %}class="active"{% endif %}><a href="{% url 'dashboard:fte_per_academic_rank_and_manager_table' %}">FTE per academic rank and manager (table)</a></li>
+                    <li {% if url_name == "fte_hc_per_institute_manager_unit_contract_type_bar" %}class="active"{% endif %}><a href="{% url 'dashboard:fte_hc_per_institute_manager_unit_contract_type_bar' %}">FTE &amp; head count per institute, unit, manager and contract type (stacked bars)</a></li>
+                    <li {% if url_name == "fte_hc_per_institute_manager_unit_contract_type_table" %}class="active"{% endif %}><a href="{% url 'dashboard:fte_hc_per_institute_manager_unit_contract_type_table' %}">FTE &amp; head count per institute, unit, manager and contract type (table)</a></li>
+                </ul>
             </li>
             <li {% if url_name == "campus" %}class="active"{% endif %}><a href="{% url 'dashboard:campus' %}">Campus</a>
                 <ul>
-                    <li {% if url_name == "space_used" %}class="active"{% endif %}><a href="{% url 'dashboard:space_used' %}">Space used</a></li>
+                    <li {% if url_name == "area_per_academic_rank_and_manager_bar" %}class="active"{% endif %}><a href="{% url 'dashboard:area_per_academic_rank_and_manager_bar' %}">Area per academic rank and manager (bars)</a></li>
+                    <li {% if url_name == "area_per_academic_rank_table" %}class="active"{% endif %}><a href="{% url 'dashboard:area_per_academic_rank_table' %}">Area per academic rank (table)</a></li>
+                    <li {% if url_name == "area_per_academic_rank_and_manager_treemap" %}class="active"{% endif %}><a href="{% url 'dashboard:area_per_academic_rank_and_manager_treemap' %}">Area per academic rank and manager (treemap)</a></li>
+                    <li {% if url_name == "area_per_faculty_institute_unit_treemap" %}class="active"{% endif %}><a href="{% url 'dashboard:area_per_faculty_institute_unit_treemap' %}">Area per faculty, institute and unit (treemap)</a></li>
+                    <li {% if url_name == "area_per_faculty_institute_unit_table" %}class="active"{% endif %}><a href="{% url 'dashboard:area_per_faculty_institute_unit_table' %}">Area per faculty, institute and unit (table view)</a></li>
+                    {% comment %} <li {% if url_name == "space_used" %}class="active"{% endif %}><a href="{% url 'dashboard:space_used' %}">Space used</a></li> {% endcomment %}
                 </ul>
             </li>
         </ul>
