@@ -17,6 +17,7 @@ django-debug-toolbar = "*"
 ldap3 = "*"
 django-url-or-relative-url-field = "*"
 Django = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.7"
