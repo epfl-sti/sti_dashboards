@@ -4,7 +4,69 @@
         <h2 class="h5 sr-only-xl">On the same topic</h2>
         <ul>
             <li {% if url_name == "index" %}class="active"{% endif %}><a href="{% url 'dashboard:index' %}">About</a></li>
-            <li {% if url_name == "teaching" %}class="active"{% endif %}><a href="{% url 'dashboard:teaching' %}">Teaching</a>
+            {# Faculty block #}
+            {% if request.user.get_is_dean %}
+            <li><a>Faculty</a>
+                <ul>
+                    <li><a>Teaching</a></li>
+                    <li><a>Finance</a></li>
+                    <li><a>Human Resources</a></li>
+                    <li><a>Space</a></li>
+                    <!-- <li><a>Publications</a></li> -->
+                    <!-- <li><a>Awards</a></li> -->
+                    <!-- <li><a>Services</a></li> -->
+                </ul>
+            </li>
+            {% endif %}
+
+            {# Institutes block #}
+            {% if request.user.get_managed_institutes or request.user.get_is_dean %}
+                <li><a>Institutes</a>
+                    <ul>
+                        {% for key, value in INSTITUTES.items %}
+                            {% if key in request.user.get_managed_institutes or request.user.get_is_dean %}
+                                <li><a>{{ value }}</a>
+                                    <ul>
+                                        <li><a>Teaching</a></li>
+                                        <li><a>Finance</a></li>
+                                        <li><a>Human Resources</a></li>
+                                        <li><a>Space</a></li>
+                                        <!-- <li><a>Publications</a></li> -->
+                                        <!-- <li><a>Awards</a></li> -->
+                                        <!-- <li><a>Services</a></li> -->
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endif %}
+
+            {# Personal block #}
+            {% with delegations=request.user.get_prof_delegations %}
+            {% if delegations|length > 0 %}
+                <li>
+                    <a>Personal</a>
+                    <ul>
+                        {% for delegation in delegations %}
+                            <li>{{ delegation.last_name }}, {{ delegation.first_name }}
+                                <ul>
+                                    <li><a>Teaching</a></li>
+                                    <li><a>Finance</a></li>
+                                    <li><a>Human Resources</a></li>
+                                    <li><a>Space</a></li>
+                                    <!-- <li><a>Publications</a></li> -->
+                                    <!-- <li><a>Awards</a></li> -->
+                                    <!-- <li><a>Services</a></li> -->
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+           {% endif %}
+           {% endwith %}
+
+            {% comment %} <li {% if url_name == "teaching" %}class="active"{% endif %}><a href="{% url 'dashboard:teaching' %}">Teaching</a>
                 <ul>
                     <li {% if url_name == "ECTS_credits_rankings" %}class="active"{% endif %}><a href="{% url 'dashboard:ECTS_credits_rankings' %}">Rankings of ECTS credits</a></li>
                     <li {% if url_name == "teaching_hours_rankings" %}class="active"{% endif %}><a href="{% url 'dashboard:teaching_hours_rankings' %}">Rankings of number of hours</a></li>
@@ -39,9 +101,8 @@
                     <li {% if url_name == "area_per_academic_rank_and_manager_treemap" %}class="active"{% endif %}><a href="{% url 'dashboard:area_per_academic_rank_and_manager_treemap' %}">Area per academic rank and manager (treemap)</a></li>
                     <li {% if url_name == "area_per_faculty_institute_unit_treemap" %}class="active"{% endif %}><a href="{% url 'dashboard:area_per_faculty_institute_unit_treemap' %}">Area per faculty, institute and unit (treemap)</a></li>
                     <li {% if url_name == "area_per_faculty_institute_unit_table" %}class="active"{% endif %}><a href="{% url 'dashboard:area_per_faculty_institute_unit_table' %}">Area per faculty, institute and unit (table view)</a></li>
-                    {% comment %} <li {% if url_name == "space_used" %}class="active"{% endif %}><a href="{% url 'dashboard:space_used' %}">Space used</a></li> {% endcomment %}
                 </ul>
-            </li>
+            </li> {% endcomment %}
         </ul>
     </nav>
 </aside>
