@@ -5,35 +5,113 @@
         <ul>
             <li {% if url_name == "index" %}class="active"{% endif %}><a href="{% url 'dashboard:index' %}">About</a></li>
             {# Faculty block #}
-            {% if request.user.get_is_dean %}
-            <li><a>Faculty</a>
-                <ul>
-                    <li><a>Teaching</a></li>
-                    <li><a>Finance</a></li>
-                    <li><a>Human Resources</a></li>
-                    <li><a>Space</a></li>
-                    <!-- <li><a>Publications</a></li> -->
-                    <!-- <li><a>Awards</a></li> -->
-                    <!-- <li><a>Services</a></li> -->
-                </ul>
-            </li>
+            {% if request.user.get_is_dean or request.user.get_is_vice_dean %}
+                <li><a>Faculty</a>
+                    <ul>
+                        <li><a>Teaching</a>
+                            <ul>
+                                <li>Summary</li>
+                                <li>Details</li>
+                                <li>Figures</li>
+                            </ul>
+                        </li>
+                        <li><a>Finance</a>
+                            <ul>
+                                <li>Summary</li>
+                                <li>Details</li>
+                                <li>Figures</li>
+                            </ul>
+                        </li>
+                        <li><a>Human Resources</a>
+                            <ul>
+                                <li>Summary</li>
+                                <li>Details</li>
+                                <li>Figures</li>
+                            </ul>
+                        </li>
+                        <li><a>Space</a>
+                            <ul>
+                                <li>Summary</li>
+                                <li>Details</li>
+                                <li>Figures</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+
+            {# Vice-dean view #}
+            {% if request.user.get_is_dean or request.user.get_is_vice_dean %}
+                <li><a>Faculty (vice-dean)</a>
+                    <ul>
+                        <li><a>Teaching</a>
+                            <ul>
+                                <li>Summary</li>
+                                <li>Details</li>
+                                <li>Figures</li>
+                            </ul>
+                        </li>
+                        <li><a>Finance</a>
+                            <ul>
+                                <li>Summary</li>
+                                <li>Details</li>
+                                <li>Figures</li>
+                            </ul>
+                        </li>
+                        <li><a>Human Resources</a>
+                            <ul>
+                                <li>Summary</li>
+                                <li>Details</li>
+                                <li>Figures</li>
+                            </ul>
+                        </li>
+                        <li><a>Space</a>
+                            <ul>
+                                <li>Summary</li>
+                                <li>Details</li>
+                                <li>Figures</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
             {% endif %}
 
             {# Institutes block #}
-            {% if request.user.get_managed_institutes or request.user.get_is_dean %}
+            {% if request.user.get_managed_institutes or request.user.get_is_dean or request.user.get_is_vice_dean %}
                 <li><a>Institutes</a>
                     <ul>
                         {% for key, value in INSTITUTES.items %}
-                            {% if key in request.user.get_managed_institutes or request.user.get_is_dean %}
+                            {% if key in request.user.get_managed_institutes or request.user.get_is_dean or request.user.is_vice_dean %}
                                 <li><a>{{ value }}</a>
                                     <ul>
-                                        <li><a>Teaching</a></li>
-                                        <li><a>Finance</a></li>
-                                        <li><a>Human Resources</a></li>
-                                        <li><a>Space</a></li>
-                                        <!-- <li><a>Publications</a></li> -->
-                                        <!-- <li><a>Awards</a></li> -->
-                                        <!-- <li><a>Services</a></li> -->
+                                        <li><a>Teaching</a>
+                                            <ul>
+                                                <li>Summary</li>
+                                                <li>Details</li>
+                                                <li>Figures</li>
+                                            </ul>
+                                        </li>
+                                        <li><a>Finance</a>
+                                            <ul>
+                                                <li>Summary</li>
+                                                <li>Details</li>
+                                                <li>Figures</li>
+                                            </ul>
+                                        </li>
+                                        <li><a>Human Resources</a>
+                                            <ul>
+                                                <li>Summary</li>
+                                                <li>Details</li>
+                                                <li>Figures</li>
+                                            </ul>
+                                        </li>
+                                        <li><a>Space</a>
+                                            <ul>
+                                                <li>Summary</li>
+                                                <li>Details</li>
+                                                <li>Figures</li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                             {% endif %}
@@ -55,9 +133,6 @@
                                     <li><a>Finance</a></li>
                                     <li><a>Human Resources</a></li>
                                     <li><a>Space</a></li>
-                                    <!-- <li><a>Publications</a></li> -->
-                                    <!-- <li><a>Awards</a></li> -->
-                                    <!-- <li><a>Services</a></li> -->
                                 </ul>
                             </li>
                         {% endfor %}
