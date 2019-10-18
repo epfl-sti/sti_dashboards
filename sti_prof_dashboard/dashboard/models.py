@@ -69,6 +69,14 @@ class Person(AbstractUser):
     def set_is_prof(self, value):
         self._is_prof = value
 
+    _is_vice_dean = models.BooleanField(null=False, blank=False, default=False)
+
+    def get_is_vice_dean(self):
+        return self._is_vice_dean
+
+    def set_is_vice_dean(self, value):
+        self._is_vice_dean = value
+
     def get_prof_delegations(self, *args, **kwargs):
         already_checked_users = kwargs.get('already_checked_users', list())
 
