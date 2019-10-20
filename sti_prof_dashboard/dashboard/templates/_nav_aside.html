@@ -1,9 +1,8 @@
-{% with url_name=request.resolver_match.url_name %}
 <aside class="nav-aside-wrapper">
     <nav id="nav-aside" class="nav-aside" role="navigation" aria-describedby="nav-aside-title">
         <h2 class="h5 sr-only-xl">On the same topic</h2>
         <ul>
-            <li {% if url_name == "index" %}class="active"{% endif %}><a href="{% url 'dashboard:index' %}">About</a></li>
+            <li><a href="{% url 'dashboard:index' %}">About</a></li>
             {# Faculty block #}
             {% if request.user.get_is_dean or request.user.get_is_vice_dean %}
                 <li><a>Faculty</a>
@@ -209,4 +208,3 @@
         </ul>
     </nav>
 </aside>
-{% endwith %}
