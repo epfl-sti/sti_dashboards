@@ -3,7 +3,8 @@
 {% block title%}{% endblock %}
 {% block body_content%}
 <div class="container">
-  <div id="vizContainer_01" style="width:800px; height:700px;"></div>
+  <div id="vizContainer_01"></div>
+  <div id="vizContainer_02"></div>
 </div>
 {% endblock %}
 
@@ -23,8 +24,21 @@ function initViz_01() {
     viz = new tableau.Viz(containerDiv, url, options);
 }
 
+function initViz_02() {
+    var containerDiv = document.getElementById("vizContainer_02"),
+        url = "https://tableau.epfl.ch/views/teaching/institute_summary_02",
+        options = {
+            hideTabs: true,
+            hideToolbar: true,
+            'Institute': '{{ institute }}',
+        };
+
+    viz = new tableau.Viz(containerDiv, url, options);
+}
+
 $(document).ready(function(){
     initViz_01();
+    initViz_02();
 })
 </script>
 {% endblock%}
