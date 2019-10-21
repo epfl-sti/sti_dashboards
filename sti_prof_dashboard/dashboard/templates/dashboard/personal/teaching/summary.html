@@ -4,6 +4,7 @@
 {% block body_content%}
 <div class="container">
   <div id="vizContainer_01"></div>
+  <div id="vizContainer_02"></div>
 </div>
 {% endblock %}
 
@@ -23,8 +24,21 @@ function initViz_01() {
     viz = new tableau.Viz(containerDiv, url, options);
 }
 
+function initViz_02() {
+    var containerDiv = document.getElementById("vizContainer_02"),
+        url = "https://tableau.epfl.ch/views/teaching/personal_summary_02",
+        options = {
+            hideTabs: true,
+            hideToolbar: true,
+            'Sciper': '{{ sciper }}',
+        };
+
+    viz = new tableau.Viz(containerDiv, url, options);
+}
+
 $(document).ready(function(){
     initViz_01();
+    initViz_02();
 })
 </script>
 {% endblock%}
