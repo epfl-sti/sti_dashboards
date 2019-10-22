@@ -3,20 +3,27 @@
 {% block title%}{% endblock %}
 {% block body_content%}
 <div class="container">
-  <p>level: {{ level }}</p>
-  {% if role %}
-  <p>role: {{ role }}</p>
-  {% endif %}
-  {% if institute %}
-  <p>institute: {{ institute }}</p>
-  {% endif %}
-  {% if sciper %}
-  <p>sciper: {{ sciper }}</p>
-  {% endif %}
-  <p>category: {{ category }}</p>
-  <p>subcategory: {{ subcategory }}</p>
+  <div id="vizContainer_01"></div>
 </div>
 {% endblock %}
 
 {% block scripts_end_of_page_content %}
+<script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+
+<script type="text/javascript">
+function initViz_01() {
+    var containerDiv = document.getElementById("vizContainer_01"),
+        url = "https://tableau.epfl.ch/views/finance/dean_figures_01",
+        options = {
+            hideTabs: true,
+            hideToolbar: true,
+        };
+
+    viz = new tableau.Viz(containerDiv, url, options);
+}
+
+$(document).ready(function(){
+    initViz_01();
+})
+</script>
 {% endblock%}
