@@ -5,6 +5,7 @@
 <div class="container">
   <div id="vizContainer_01"></div>
   <div id="vizContainer_02"></div>
+  <div id="vizContainer_03"></div>
 </div>
 {% endblock %}
 
@@ -37,9 +38,23 @@ function initViz_02() {
     viz = new tableau.Viz(containerDiv, url, options);
 }
 
+
+function initViz_03() {
+    var containerDiv = document.getElementById("vizContainer_03"),
+        url = "https://tableau.epfl.ch/views/space/dean_summary_03",
+        options = {
+            hideTabs: true,
+            hideToolbar: true,
+            'Institute': '{{ institute }}'
+        };
+
+    viz = new tableau.Viz(containerDiv, url, options);
+}
+
 $(document).ready(function(){
     initViz_01();
     initViz_02();
+    initViz_03();
 })
 </script>
 {% endblock%}
