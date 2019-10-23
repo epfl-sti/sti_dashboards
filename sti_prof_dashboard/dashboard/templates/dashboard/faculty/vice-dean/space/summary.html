@@ -4,6 +4,9 @@
 {% block body_content%}
 <div class="container">
   <div id="vizContainer_01"></div>
+  <div id="vizContainer_02"></div>
+  <div id="vizContainer_03"></div>
+  <div id="vizContainer_04"></div>
 </div>
 {% endblock %}
 
@@ -22,8 +25,44 @@ function initViz_01() {
     viz = new tableau.Viz(containerDiv, url, options);
 }
 
+function initViz_02() {
+    var containerDiv = document.getElementById("vizContainer_02"),
+        url = "https://tableau.epfl.ch/views/space/vice-dean_summary_02",
+        options = {
+            hideTabs: true,
+            hideToolbar: true,
+        };
+
+    viz = new tableau.Viz(containerDiv, url, options);
+}
+
+function initViz_03() {
+    var containerDiv = document.getElementById("vizContainer_03"),
+        url = "https://tableau.epfl.ch/views/space/vice-dean_summary_03",
+        options = {
+            hideTabs: true,
+            hideToolbar: true,
+        };
+
+    viz = new tableau.Viz(containerDiv, url, options);
+}
+
+function initViz_04() {
+    var containerDiv = document.getElementById("vizContainer_04"),
+        url = "https://tableau.epfl.ch/views/space/vice-dean_summary_04",
+        options = {
+            hideTabs: true,
+            hideToolbar: true,
+        };
+
+    viz = new tableau.Viz(containerDiv, url, options);
+}
+
 $(document).ready(function(){
     initViz_01();
+    initViz_02();
+    initViz_03();
+    initViz_04();
 })
 </script>
 {% endblock%}
