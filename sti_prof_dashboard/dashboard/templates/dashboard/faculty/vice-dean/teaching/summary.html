@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block scripts_end_of_page_content %}
-<script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
 
 <script type="text/javascript">
 function initViz_01() {
