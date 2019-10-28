@@ -141,3 +141,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+APP_BASE_URL = os.environ.get('DJANGO_APP_BASE_URL', 'https://localhost')
