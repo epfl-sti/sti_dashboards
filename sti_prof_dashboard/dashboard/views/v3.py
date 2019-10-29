@@ -2,12 +2,17 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.decorators.cache import cache_control, cache_page
+from django.views.decorators.cache import cache_control, cache_page, patch_cache_control
+from django.views.decorators.vary import vary_on_cookie
 from django.core.exceptions import PermissionDenied
 
 from dashboard.models import NextStep, Person
 from epfl.sti.helpers import ldap as epfl_ldap
 
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+@vary_on_cookie
 def generic_faculty(request, *args, **kwargs):
     if not request.user.get_is_dean() and not request.user.get_is_vice_dean():
         raise PermissionDenied()
@@ -24,8 +29,15 @@ def generic_faculty(request, *args, **kwargs):
     }
 
     template_path = 'dashboard/faculty/{}/{}/{}.html'.format(role, category, subcategory)
-    return render(request, template_path, context=context)
+    response = render(request, template_path, context=context)
+    patch_cache_control(response, private=True)
 
+    return response
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+@vary_on_cookie
 def generic_institute(request, *args, **kwargs):
     level = 'institute'
     institute = kwargs.get('institute', '')
@@ -50,8 +62,15 @@ def generic_institute(request, *args, **kwargs):
 
     template_path = 'dashboard/institute/{}/{}.html'.format(category, subcategory)
 
-    return render(request, template_path, context=context)
+    response = render(request, template_path, context=context)
+    patch_cache_control(response, private=True)
+    return response
 
+
+
+@cache_page(60 * 15)
+@cache_control(max_age=3600)
+@vary_on_cookie
 def generic_personal(request, *args, **kwargs):
     level = 'personal'
     sciper = kwargs.get('sciper', '')
@@ -83,4 +102,6 @@ def generic_personal(request, *args, **kwargs):
 
     template_path = 'dashboard/personal/{}/{}.html'.format(category, subcategory)
 
-    return render(request, template_path, context)
+    response = render(request, template_path, context)
+    patch_cache_control(response, private=True)
+    return response
