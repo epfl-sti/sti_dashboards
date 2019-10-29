@@ -80,7 +80,7 @@
                 <li><a>Institutes</a>
                     <ul>
                         {% for key, value in INSTITUTES.items %}
-                            {% if key in request.user.get_managed_institutes or request.user.get_is_dean or request.user.is_vice_dean %}
+                            {% if request.user.get_is_dean or request.user.get_is_vice_dean or key in request.user.get_managed_institutes %}
                                 <li><a>{{ value }}</a>
                                     <ul>
                                         <li><a>Teaching</a>
