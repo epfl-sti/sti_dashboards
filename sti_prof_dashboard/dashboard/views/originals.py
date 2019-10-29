@@ -2,7 +2,9 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.decorators.cache import cache_control, cache_page
+from django.views.decorators.cache import cache_control, cache_page, patch_cache_control
+from django.views.decorators.vary import vary_on_cookie
+
 
 from dashboard.models import NextStep
 from epfl.sti.helpers import ldap as epfl_ldap
@@ -10,6 +12,7 @@ from epfl.sti.helpers import ldap as epfl_ldap
 
 @cache_page(60 * 15)
 @cache_control(max_age=3600)
+@vary_on_cookie
 def index(request):
     next_steps = list()
     next_step_1 = NextStep()
@@ -41,7 +44,9 @@ def index(request):
         'title': 'STI dashboards',
         'details': "You will find a bird's eye view on the statistics related to your activities at STI. Dashboards on data such as the number of ECTS credits you taught can be found in the menu on the left hand side.",
         'nextsteps': next_steps}
-    return render(request, 'generic_section_page.html', context=context)
+    response = render(request, 'generic_section_page.html', context=context)
+    patch_cache_control(response, private=True)
+    return response
 
 
 @cache_page(60 * 15)
