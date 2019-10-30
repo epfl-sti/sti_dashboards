@@ -28,7 +28,11 @@ def generic_faculty(request, *args, **kwargs):
         'subcategory': subcategory
     }
 
-    template_path = 'dashboard/faculty/{}/{}/{}.html'.format(role, category, subcategory)
+    if subcategory:
+        template_path = 'dashboard/faculty/{}/{}/{}.html'.format(role, category, subcategory)
+    else:
+        template_path = 'dashboard/faculty/{}/{}.html'.format(role, category)
+
     response = render(request, template_path, context=context)
     patch_cache_control(response, private=True)
 
@@ -65,7 +69,6 @@ def generic_institute(request, *args, **kwargs):
     response = render(request, template_path, context=context)
     patch_cache_control(response, private=True)
     return response
-
 
 
 @cache_page(60 * 15)

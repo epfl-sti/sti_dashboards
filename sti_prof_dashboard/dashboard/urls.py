@@ -9,6 +9,7 @@ urlpatterns = [
      # v3 patterns
      re_path(r'^$', originals.index, name="index"),
      re_path(r'^faculty/(?P<role>(\w|-|_)+)/(?P<category>\w+)/(?P<subcategory>\w+)/$', v3.generic_faculty, name='faculty_view'),
+     re_path(r'^faculty/(?P<role>(\w|-|_)+)/(?P<category>\w+)/$', v3.generic_faculty, name='faculty_view'),
      re_path(r'^institute/(?P<institute>(\w|-|_)+)/(?P<category>\w+)/(?P<subcategory>\w+)/$', v3.generic_institute, name="institute_view"),
      re_path(r'^personal/(?P<sciper>\w+)/(?P<category>\w+)/(?P<subcategory>\w+)/$', v3.generic_personal, name="personal_view"),
 
