@@ -26,6 +26,9 @@
     <div class="avatar-teaser-body">
         <p>{{ request.user.last_name }}, {{ request.user.first_name|truncatewords:1 }}</p>
     </div>
+    <div>&nbsp;
+     <a  class="btn btn-primary btn-sm" href="mailto:STIDashboard_Support@groupes.epfl.ch?subject=[stidashboards] help&body=url:{{ request.build_absolute_uri }}"><i class="fas fa-medkit"></i> help</a>
+    </div>
     </div>
 </nav>
 
