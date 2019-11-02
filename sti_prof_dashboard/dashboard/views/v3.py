@@ -64,7 +64,10 @@ def generic_institute(request, *args, **kwargs):
         'subcategory': subcategory
     }
 
-    template_path = 'dashboard/institute/{}/{}.html'.format(category, subcategory)
+    if subcategory:
+        template_path = 'dashboard/institute/{}/{}.html'.format(category, subcategory)
+    else:
+        template_path = 'dashboard/{}/{}.html'.format(level, category)
 
     response = render(request, template_path, context=context)
     patch_cache_control(response, private=True)
