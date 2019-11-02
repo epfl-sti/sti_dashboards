@@ -37,13 +37,7 @@
             {% if request.user.get_is_dean or request.user.get_is_vice_dean %}
                 <li><a>Faculty (vice-dean)</a>
                     <ul>
-                        <li><a>Teaching</a>
-                            <ul>
-                                <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'teaching' 'summary' %}">Summary</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'teaching' 'details' %}">Details</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'teaching' 'figures' %}">Figures</a></li>
-                            </ul>
-                        </li>
+                        <li><a  href="{% url 'dashboard:faculty_view' 'vice-dean' 'teaching' %}">Teaching</a></li>
                         <li><a>Finance</a>
                             <ul>
                                 <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'finance' 'summary' %}">Summary</a></li>
