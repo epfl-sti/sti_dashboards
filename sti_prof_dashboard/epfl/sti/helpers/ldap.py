@@ -1,4 +1,4 @@
-from ldap3 import ALL, Connection, Server
+from ldap3 import ALL, Connection, Server, BASE
 from copy import deepcopy
 
 
@@ -169,3 +169,41 @@ def get_managed_persons(managed_units):
                 return_value.append(current_user)
 
     return return_value
+
+
+def get_ou_info(ou_dn):
+    ldap_host = 'ldap.epfl.ch'
+    filter = '(objectClass=*)'
+    ldap_server = Server(ldap_host, use_ssl=True, get_info=ALL)
+    conn = Connection(ldap_server, auto_bind=True)
+    conn.search(ou_dn, filter, BASE, attributes=['description;lang-en', 'ou'])
+    assert len(conn.entries) == 1
+    entry = conn.entries[0]
+    unit_description = min(entry['description;lang-en'], key=len)
+    unit_description = unit_description.lower()
+    if 'institute' in unit_description:
+        return True, min(entry['ou'], key=len)
+    else:
+        return False, ''
+
+
+def get_institute(sciper):
+    ldap_host = ' ldap.epfl.ch'
+    base_dn = 'o=epfl,c=ch'
+    filter = '(uniqueIdentifier={})'.format(sciper)
+    ldap_server = Server(ldap_host, use_ssl=True, get_info=ALL)
+    conn = Connection(ldap_server, auto_bind=True)
+    conn.search(base_dn, filter)
+    found_institute = ''
+    for entry in conn.entries:
+        dn = entry.entry_dn
+
+        # Get the DN of the parent entry
+        ou_dn = dn[dn.find(',')+1:]
+        while ou_dn != base_dn:
+            is_institute, acronym = get_ou_info(ou_dn)
+            if is_institute == True:
+                found_institute = acronym
+                break
+            ou_dn = ou_dn[ou_dn.find(',')+1:]
+    return found_institute
