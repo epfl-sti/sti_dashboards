@@ -3,8 +3,7 @@
 {% block title%}{% endblock %}
 {% block body_content%}
 <div class="container">
-  <div id="vizContainer_01"></div>
-  <div id="vizContainer_02"></div>
+  <div id="vizContainer_summary"></div>
 </div>
 {% endblock %}
 
@@ -12,33 +11,28 @@
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
 
 <script type="text/javascript">
-function initViz_01() {
-    var containerDiv = document.getElementById("vizContainer_01"),
-        url = "https://tableau.epfl.ch/views/teaching/personal_summary_01",
-        options = {
-            hideTabs: true,
-            hideToolbar: true,
-            'Sciper': '{{ sciper }}',
+function initVizContainer_summary() {
+    var vizContainer_summary_containerDiv = document.getElementById("vizContainer_summary"),
+    url = "https://tableau.epfl.ch/views/teaching/personal_summary",
+    options = {
+        hideTabs: true,
+        hideToolbar: true,
+        width: '800px',
+        height: '2000px',
+        'Institute': '{{ institute }}',
+        onFirstInteractive: function() {
+            viz_container_summary_worksheets = viz_container_summary.getWorkbook().getActiveSheet().getWorksheets();
+
+            // Only highlight the person on the first worksheet.
+            // The coordination across all worksheets is taken care of by a custom action on Tableau
+            viz_container_summary_worksheets[0].selectMarksAsync('Sciper', '{{ sciper }}', tableau.SelectionUpdateType.REPLACE);
+            },
         };
-
-    viz = new tableau.Viz(containerDiv, url, options);
-}
-
-function initViz_02() {
-    var containerDiv = document.getElementById("vizContainer_02"),
-        url = "https://tableau.epfl.ch/views/teaching/personal_summary_02",
-        options = {
-            hideTabs: true,
-            hideToolbar: true,
-            'Sciper': '{{ sciper }}',
-        };
-
-    viz = new tableau.Viz(containerDiv, url, options);
+    viz_container_summary = new tableau.Viz(vizContainer_summary_containerDiv, url, options);
 }
 
 $(document).ready(function(){
-    initViz_01();
-    initViz_02();
+    initVizContainer_summary();
 })
 </script>
 {% endblock%}

@@ -99,11 +99,14 @@ def generic_personal(request, *args, **kwargs):
     if not is_allowed:
         raise PermissionDenied()
 
+    institute = epfl_ldap.get_institute(sciper)
+
     context = {
         'level': 'personal',
         'sciper': sciper,
         'category': category,
-        'subcategory': subcategory
+        'subcategory': subcategory,
+        'institute': institute,
     }
 
     template_path = 'dashboard/personal/{}/{}.html'.format(category, subcategory)
