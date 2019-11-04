@@ -8,13 +8,7 @@
                 <li><a>Faculty</a>
                     <ul>
                         <li><a  href="{% url 'dashboard:faculty_view' 'dean' 'teaching' %}">Teaching</a></li>
-                        <li><a>Finance</a>
-                            <ul>
-                                <li><a href="{% url 'dashboard:faculty_view' 'dean' 'finance' 'summary' %}">Summary</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'dean' 'finance' 'details' %}">Details</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'dean' 'finance' 'figures' %}">Figures</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="{% url 'dashboard:faculty_view' 'dean' 'finance' %}">Finance</a></li>
                         <li><a>Human Resources</a>
                             <ul>
                                 <li><a href="{% url 'dashboard:faculty_view' 'dean' 'hr' 'summary' %}">Summary</a></li>
@@ -38,13 +32,7 @@
                 <li><a>Faculty (vice-dean)</a>
                     <ul>
                         <li><a  href="{% url 'dashboard:faculty_view' 'vice-dean' 'teaching' %}">Teaching</a></li>
-                        <li><a>Finance</a>
-                            <ul>
-                                <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'finance' 'summary' %}">Summary</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'finance' 'details' %}">Details</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'finance' 'figures' %}">Figures</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'finance' %}">Finance</a></li>
                         <li><a>Human Resources</a>
                             <ul>
                                 <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'hr' 'summary' %}">Summary</a></li>
@@ -72,13 +60,7 @@
                                 <li><a>{{ value }}</a>
                                     <ul>
                                         <li><a  href="{% url 'dashboard:institute_view' key 'teaching' %}">Teaching</a></li>
-                                        <li><a>Finance</a>
-                                            <ul>
-                                                <li><a href="{% url 'dashboard:institute_view' key 'finance' 'summary' %}">Summary</a></li>
-                                                <li><a href="{% url 'dashboard:institute_view' key 'finance' 'details' %}">Details</a></li>
-                                                <li><a href="{% url 'dashboard:institute_view' key 'finance' 'figures' %}">Figures</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="{% url 'dashboard:institute_view' key 'finance' %}">Finance</a></li>
                                         <li><a>Human Resources</a>
                                             <ul>
                                                 <li><a href="{% url 'dashboard:institute_view' key 'hr' 'summary' %}">Summary</a></li>
@@ -111,13 +93,7 @@
                             <li><a>{{ delegation.last_name }}, {{ delegation.first_name }}</a>
                                 <ul>
                                     <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'teaching' %}">Teaching</a></li>
-                                    <li><a>Finance</a>
-                                        <ul>
-                                            <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'finance' 'summary' %}">Summary</a></li>
-                                            <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'finance' 'details' %}">Details</a></li>
-                                            <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'finance' 'figures' %}">Figures</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'finance' %}">Finance</a></li>
                                     <li><a>Human Resources</a>
                                         <ul>
                                             <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'hr' 'summary' %}">Summary</a></li>
