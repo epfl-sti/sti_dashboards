@@ -109,7 +109,10 @@ def generic_personal(request, *args, **kwargs):
         'institute': institute,
     }
 
-    template_path = 'dashboard/personal/{}/{}.html'.format(category, subcategory)
+    if subcategory:
+        template_path = 'dashboard/personal/{}/{}.html'.format(category, subcategory)
+    else:
+        template_path = 'dashboard/personal/{}.html'.format(category)
 
     response = render(request, template_path, context)
     patch_cache_control(response, private=True)

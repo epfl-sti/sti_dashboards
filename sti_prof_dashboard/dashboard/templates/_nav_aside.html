@@ -110,13 +110,7 @@
                         {% for delegation in delegations %}
                             <li><a>{{ delegation.last_name }}, {{ delegation.first_name }}</a>
                                 <ul>
-                                    <li><a>Teaching</a>
-                                        <ul>
-                                            <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'teaching' 'summary' %}">Summary</a></li>
-                                            <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'teaching' 'details' %}">Details</a></li>
-                                            <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'teaching' 'figures' %}">Figures</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'teaching' %}">Teaching</a></li>
                                     <li><a>Finance</a>
                                         <ul>
                                             <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'finance' 'summary' %}">Summary</a></li>

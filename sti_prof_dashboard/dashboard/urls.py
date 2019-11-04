@@ -13,6 +13,7 @@ urlpatterns = [
      re_path(r'^institute/(?P<institute>(\w|-|_)+)/(?P<category>\w+)/(?P<subcategory>\w+)/$', v3.generic_institute, name="institute_view"),
      re_path(r'^institute/(?P<institute>(\w|-|_)+)/(?P<category>\w+)/$', v3.generic_institute, name="institute_view"),
      re_path(r'^personal/(?P<sciper>\w+)/(?P<category>\w+)/(?P<subcategory>\w+)/$', v3.generic_personal, name="personal_view"),
+     re_path(r'^personal/(?P<sciper>\w+)/(?P<category>\w+)/$', v3.generic_personal, name="personal_view"),
 
      # Originals
 #     path('v2/', originals.index, name="index"),
