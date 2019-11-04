@@ -10,13 +10,7 @@
                         <li><a  href="{% url 'dashboard:faculty_view' 'dean' 'teaching' %}">Teaching</a></li>
                         <li><a href="{% url 'dashboard:faculty_view' 'dean' 'finance' %}">Finance</a></li>
                         <li><a href="{% url 'dashboard:faculty_view' 'dean' 'hr' %}">Human Resources</a></li>
-                        <li><a>Space</a>
-                            <ul>
-                                <li><a href="{% url 'dashboard:faculty_view' 'dean' 'space' 'summary' %}">Summary</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'dean' 'space' 'details' %}">Details</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'dean' 'space' 'figures' %}">Figures</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="{% url 'dashboard:faculty_view' 'dean' 'space' %}">Space</a></li>
                     </ul>
                 </li>
             {% endif %}
@@ -28,13 +22,7 @@
                         <li><a  href="{% url 'dashboard:faculty_view' 'vice-dean' 'teaching' %}">Teaching</a></li>
                         <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'finance' %}">Finance</a></li>
                         <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'hr' %}">Human Resources</a></li>
-                        <li><a>Space</a>
-                            <ul>
-                                <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'space' 'summary' %}">Summary</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'space' 'details' %}">Details</a></li>
-                                <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'space' 'figures' %}">Figures</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'space' %}">Space</a></li>
                     </ul>
                 </li>
             {% endif %}
@@ -47,16 +35,10 @@
                             {% if request.user.get_is_dean or request.user.get_is_vice_dean or key in request.user.get_managed_institutes %}
                                 <li><a>{{ value }}</a>
                                     <ul>
-                                        <li><a  href="{% url 'dashboard:institute_view' key 'teaching' %}">Teaching</a></li>
+                                        <li><a href="{% url 'dashboard:institute_view' key 'teaching' %}">Teaching</a></li>
                                         <li><a href="{% url 'dashboard:institute_view' key 'finance' %}">Finance</a></li>
                                         <li><a href="{% url 'dashboard:institute_view' key 'hr' %}">Human Resources</a></li>
-                                        <li><a>Space</a>
-                                            <ul>
-                                                <li><a href="{% url 'dashboard:institute_view' key 'space' 'summary' %}">Summary</a></li>
-                                                <li><a href="{% url 'dashboard:institute_view' key 'space' 'details' %}">Details</a></li>
-                                                <li><a href="{% url 'dashboard:institute_view' key 'space' 'figures' %}">Figures</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="{% url 'dashboard:institute_view' key 'space' %}">Space</a></li>
                                     </ul>
                                 </li>
                             {% endif %}
@@ -77,13 +59,7 @@
                                     <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'teaching' %}">Teaching</a></li>
                                     <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'finance' %}">Finance</a></li>
                                     <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'hr' %}">Human Resources</a></li>
-                                    <li><a>Space</a>
-                                        <ul>
-                                            <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'space' 'summary' %}">Summary</a></li>
-                                            <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'space' 'details' %}">Details</a></li>
-                                            <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'space' 'figures' %}">Figures</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="{% url 'dashboard:personal_view' delegation.sciper 'space' %}">Space</a></li>
                                 </ul>
                             </li>
                         {% endfor %}
