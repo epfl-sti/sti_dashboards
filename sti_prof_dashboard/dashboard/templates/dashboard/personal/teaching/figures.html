@@ -3,7 +3,7 @@
 {% block title%}{% endblock %}
 {% block body_content%}
 <div class="container">
-  <div id="vizContainer_01"></div>
+  <div id="vizContainer_figures"></div>
 </div>
 {% endblock %}
 
@@ -11,20 +11,21 @@
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
 
 <script type="text/javascript">
-function initViz_01() {
-    var containerDiv = document.getElementById("vizContainer_01"),
-        url = "https://tableau.epfl.ch/views/teaching/personal_figures_01",
-        options = {
-            hideTabs: true,
-            hideToolbar: true,
-            'Sciper': '{{ sciper }}'
+function initVizContainer_figures() {
+    var vizContainer_figures_containerDiv = document.getElementById("vizContainer_figures"),
+    url = "https://tableau.epfl.ch/views/teaching/personal_figures",
+    options = {
+        hideTabs: true,
+        hideToolbar: true,
+        width: '800px',
+        height: '2000px',
+        'Sciper': '{{ sciper }}',
         };
-
-    viz = new tableau.Viz(containerDiv, url, options);
+    viz_container_figures = new tableau.Viz(vizContainer_figures_containerDiv, url, options);
 }
 
 $(document).ready(function(){
-    initViz_01();
+    initVizContainer_figures();
 })
 </script>
 {% endblock%}
