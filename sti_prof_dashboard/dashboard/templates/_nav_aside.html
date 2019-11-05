@@ -4,7 +4,8 @@
         <ul>
             <li><a href="{% url 'dashboard:index' %}">About</a></li>
             {# Faculty block #}
-            {% if request.user.get_is_dean or request.user.get_is_vice_dean %}
+            {% comment %} {% if request.user.get_is_dean or request.user.get_is_vice_dean %} {% endcomment %}
+            {% if request.user.get_is_dean %}
                 <li><a>Faculty</a>
                     <ul>
                         <li><a  href="{% url 'dashboard:faculty_view' 'dean' 'teaching' %}">Teaching</a></li>
@@ -16,7 +17,8 @@
             {% endif %}
 
             {# Vice-dean view #}
-            {% if request.user.get_is_dean or request.user.get_is_vice_dean %}
+            {% comment %} {% if request.user.get_is_dean or request.user.get_is_vice_dean %} {% endcomment %}
+            {% if request.user.get_is_vice_dean %}
                 <li><a>Faculty (vice-dean)</a>
                     <ul>
                         <li><a  href="{% url 'dashboard:faculty_view' 'vice-dean' 'teaching' %}">Teaching</a></li>
@@ -28,7 +30,8 @@
             {% endif %}
 
             {# Institutes block #}
-            {% if request.user.get_managed_institutes or request.user.get_is_dean or request.user.get_is_vice_dean %}
+            {% comment %} {% if request.user.get_managed_institutes or request.user.get_is_dean or request.user.get_is_vice_dean %} {% endcomment %}
+            {% if request.user.get_managed_institutes %}
                 <li><a>Institutes</a>
                     <ul>
                         {% for key, value in INSTITUTES.items %}
