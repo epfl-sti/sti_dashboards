@@ -51,6 +51,11 @@ function initVizContainer_summary() {
             },
         };
     viz_container_summary = new tableau.Viz(vizContainer_summary_containerDiv, url, options);
+
+    viz_container_summary.addEventListener(tableau.TableauEventName.FILTER_CHANGE, function(filter){
+        console.log('re-highlighting the dashboard because the filters have changed');
+        viz_container_summary_worksheets[0].selectMarksAsync('Sciper', '{{ sciper }}', tableau.SelectionUpdateType.REPLACE);
+    });
 }
 
 function initVizContainer_details() {
@@ -71,6 +76,11 @@ function initVizContainer_details() {
             },
         };
     viz_container_details = new tableau.Viz(vizContainer_details_containerDiv, url, options);
+
+    viz_container_details.addEventListener(tableau.TableauEventName.FILTER_CHANGE, function(filter){
+        console.log('re-highlighting the details dashboard because the filters have changed.');
+        viz_container_details_worksheets[0].selectMarksAsync('Sciper', '{{ sciper }}', tableau.SelectionUpdateType.REPLACE);
+    });
 }
 
 function initVizContainer_figures() {
