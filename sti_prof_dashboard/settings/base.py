@@ -143,3 +143,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 APP_BASE_URL = os.environ.get('DJANGO_APP_BASE_URL', 'https://localhost')
+
+
+STI_INSTITUTES = ['IBI-STI', 'IEL', 'IGM', 'IMT', 'IMX']

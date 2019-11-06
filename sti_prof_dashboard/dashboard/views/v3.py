@@ -99,7 +99,7 @@ def generic_personal(request, *args, **kwargs):
     if not is_allowed:
         raise PermissionDenied()
 
-    institute = epfl_ldap.get_institute(sciper)
+    institute = epfl_ldap.get_institute(sciper, official_institutes=settings.STI_INSTITUTES)
 
     context = {
         'level': 'personal',

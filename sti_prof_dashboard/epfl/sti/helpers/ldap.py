@@ -187,7 +187,7 @@ def get_ou_info(ou_dn):
         return False, ''
 
 
-def get_institute(sciper):
+def get_institute(sciper, official_institutes):
     ldap_host = ' ldap.epfl.ch'
     base_dn = 'o=epfl,c=ch'
     filter = '(uniqueIdentifier={})'.format(sciper)
@@ -202,7 +202,7 @@ def get_institute(sciper):
         ou_dn = dn[dn.find(',')+1:]
         while ou_dn != base_dn:
             is_institute, acronym = get_ou_info(ou_dn)
-            if is_institute == True:
+            if is_institute == True and acronym in official_institutes:
                 found_institute = acronym
                 break
             ou_dn = ou_dn[ou_dn.find(',')+1:]
