@@ -4,8 +4,11 @@
 {% block body_content%}
 <div class="container">
     <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+            <a class="nav-link active" id="faculty_summary-tab" data-toggle="tab" href="#faculty_summary" role="tab" aria-controls="faculty_summary" aria-selected="true">Faculty summary</a>
+        </li>
         <li class="nav-item">
-            <a class="nav-link active" id="summary-tab" data-toggle="tab" href="#summary" role="tab" aria-controls="summary" aria-selected="true">Summary</a>
+            <a class="nav-link" id="summary-tab" data-toggle="tab" href="#summary" role="tab" aria-controls="summary" aria-selected="true">Summary</a>
         </li>
         <li>
             <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">Details</a>
@@ -15,7 +18,10 @@
         </li>
     </ul>
     <div class="tab-content p-3">
-        <div class="tab-pane fade show active" id="summary" role="tabpanel" aria-labelledby="summary-tab">
+        <div class="tab-pane fade show active" id="faculty_summary" role="tabpanel" aria-labelledby="faculty_summary-tab">
+            <div id="vizContainer_faculty_summary"></div>
+        </div>
+        <div class="tab-pane fade" id="summary" role="tabpanel" aria-labelledby="summary-tab">
             <div id="vizContainer_summary"></div>
         </div>
         <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
@@ -33,6 +39,18 @@
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
 
 <script type="text/javascript">
+function initVizContainer_faculty_summary() {
+    var vizContainer_faculty_summary_containerDiv = document.getElementById("vizContainer_faculty_summary"),
+    url = "https://tableau.epfl.ch/views/teaching/personal_faculty_summary",
+    options = {
+        hideTabs: true,
+        hideToolbar: true,
+        width: '800px',
+        height: '2000px',
+        'Institute': '{{ institute }}',
+
+    viz_container_summary = new tableau.Viz(vizContainer_faculty_summary_containerDiv, url, options);
+}
 function initVizContainer_summary() {
     var vizContainer_summary_containerDiv = document.getElementById("vizContainer_summary"),
     url = "https://tableau.epfl.ch/views/teaching/personal_summary",
@@ -97,6 +115,7 @@ function initVizContainer_figures() {
 }
 
 $(document).ready(function(){
+    initVizContainer_faculty_summary();
     initVizContainer_summary();
     initVizContainer_details();
     initVizContainer_figures();
