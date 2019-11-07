@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block title%}{% endblock %}
 {% block body_content%}
-<div class="container">
+<div class="container-full">
   <div id="vizContainer_01"></div>
 </div>
 {% endblock %}
@@ -13,12 +13,13 @@
 <script type="text/javascript">
     //var viz, sheet;
         function initViz_01() {
+            var containerSize = $("#vizContainer_01").parent()[0].clientWidth;
             var containerDiv = document.getElementById("vizContainer_01"),
                 url = "https://tableau.epfl.ch/views/finance/vice-dean",
                 options = {
                     hideTabs: true,
                     hideToolbar: true,
-                    width: '800px',
+                    width: containerSize + 'px',
                     height: '2000px'
                 };
 

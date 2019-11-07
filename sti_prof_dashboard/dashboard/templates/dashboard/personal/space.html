@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block title%}{% endblock %}
 {% block body_content%}
-<div class="container">
+<div class="container-full">
     <div id="vizContainer_figures"></div>
 </div>
 {% endblock %}
@@ -12,12 +12,13 @@
 
 <script type="text/javascript">
 function initVizContainer_figures() {
+    var containerSize = $("#vizContainer_figures").parent()[0].clientWidth;
     var vizContainer_figures_containerDiv = document.getElementById("vizContainer_figures"),
     url = "https://tableau.epfl.ch/views/space/personal_figures",
     options = {
         hideTabs: true,
         hideToolbar: true,
-        width: '800px',
+        width: containerSize + 'px',
         height: '2000px',
         "Sciper": '{{ sciper }}',
         };

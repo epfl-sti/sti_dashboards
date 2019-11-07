@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block title%}{% endblock %}
 {% block body_content%}
-<div class="container">
+<div class="container-full">
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="summary-tab" data-toggle="tab" href="#summary" role="tab" aria-controls="summary" aria-selected="true">Summary</a>
@@ -34,12 +34,16 @@
 
 <script type="text/javascript">
 function initVizContainer_summary() {
+    // Calculates the width of the parent container so the vizualization takes the full width of the screen
+    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
+    var containerSize = $("#vizContainer_summary").parents('div.container-full')[0].clientWidth - 40;
+
     var vizContainer_summary_containerDiv = document.getElementById("vizContainer_summary"),
     url = "https://tableau.epfl.ch/views/hr/personal_summary",
     options = {
         hideTabs: true,
         hideToolbar: true,
-        width: '800px',
+        width: containerSize + 'px',
         height: '2000px',
         "Sciper": '{{ sciper }}',
         };
@@ -47,12 +51,16 @@ function initVizContainer_summary() {
 }
 
 function initVizContainer_details() {
+    // Calculates the width of the parent container so the vizualization takes the full width of the screen
+    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
+    var containerSize = $("#vizContainer_details").parents('div.container-full')[0].clientWidth - 40;
+
     var vizContainer_details_containerDiv = document.getElementById("vizContainer_details"),
     url = "https://tableau.epfl.ch/views/hr/personal_details",
     options = {
         hideTabs: true,
         hideToolbar: true,
-        width: '800px',
+        width: containerSize + 'px',
         height: '2000px',
         "Sciper": '{{ sciper }}',
         };
@@ -60,12 +68,16 @@ function initVizContainer_details() {
 }
 
 function initVizContainer_figures() {
+    // Calculates the width of the parent container so the vizualization takes the full width of the screen
+    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
+    var containerSize = $("#vizContainer_figures").parents('div.container-full')[0].clientWidth - 40;
+
     var vizContainer_figures_containerDiv = document.getElementById("vizContainer_figures"),
     url = "https://tableau.epfl.ch/views/hr/personal_figures",
     options = {
         hideTabs: true,
         hideToolbar: true,
-        width: '800px',
+        width: containerSize + 'px',
         height: '2000px',
         "Sciper": '{{ sciper }}',
         };

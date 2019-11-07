@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block title%}{% endblock %}
 {% block body_content%}
-<div class="container">
+<div class="container-full">
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="summary-tab" data-toggle="tab" href="#summary" role="tab" aria-controls="summary" aria-selected="true">Summary</a>
@@ -28,12 +28,16 @@
 
 <script type="text/javascript">
 function initViz_summary() {
+    // Calculates the width of the parent container so the vizualization takes the full width of the screen
+    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
+    var containerSize = $("#vizContainer_summary").parents('div.container-full')[0].clientWidth - 40;
+
     var containerDiv = document.getElementById("vizContainer_summary"),
         url = "https://tableau.epfl.ch/views/finance/institute_summary",
         options = {
             hideTabs: true,
             hideToolbar: true,
-            width: '800px',
+            width: containerSize + 'px',
             height: '2000px',
             'Institute': '{{ institute }}'
         };
@@ -42,12 +46,16 @@ function initViz_summary() {
 }
 
 function initViz_details() {
+    // Calculates the width of the parent container so the vizualization takes the full width of the screen
+    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
+    var containerSize = $("#vizContainer_details").parents('div.container-full')[0].clientWidth - 40;
+
     var containerDiv = document.getElementById("vizContainer_details"),
         url = "https://tableau.epfl.ch/views/finance/institute_details",
         options = {
             hideTabs: true,
             hideToolbar: true,
-            width: '800px',
+            width: containerSize + 'px',
             height: '2000px',
             'Institute': '{{ institute }}'
         };
