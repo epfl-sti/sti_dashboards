@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <ul aria-hidden="true" class="nav-header d-none d-xl-flex">
     <li id="menu-item-1">
         <a class="nav-item" href="https://www.epfl.ch/about/" target="_blank">About</a>
@@ -20,6 +21,9 @@
 </ul>
 <nav class="nav-lang nav-lang-short ml-auto">
     <div class="avatar-teaser">
+        <div style="padding-right: 10px">
+            <img src="{% static 'dashboard/img/sti_logo.png'%}" alt="Logo EPFL, École polytechnique fédérale de Lausanne">
+        </div>
         <a class="avatar-teaser-img-placeholder" href="https://people.epfl.ch/{{ request.user.sciper }}" target="_blank">
             <img src="{{ request.user.picture_url|default_if_none:'/static/dashboard/img/user.png' }}">
         </a>
