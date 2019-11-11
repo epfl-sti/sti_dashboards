@@ -23,12 +23,9 @@
         <a class="avatar-teaser-img-placeholder" href="https://people.epfl.ch/{{ request.user.sciper }}" target="_blank">
             <img src="{{ request.user.picture_url|default_if_none:'/static/dashboard/img/user.png' }}">
         </a>
-    <div class="avatar-teaser-body">
-        <p>{{ request.user.last_name }}, {{ request.user.first_name|truncatewords:1 }}</p>
-    </div>
-    <div>&nbsp;
-     <a  class="btn btn-primary btn-sm" href="mailto:STIDashboard_Support@groupes.epfl.ch?subject=[stidashboards] help&body=url:{{ request.build_absolute_uri }}"><i class="fas fa-medkit"></i> help</a>
-    </div>
+        <div class="avatar-teaser-body">
+            <p>{{ request.user.last_name }}, {{ request.user.first_name|truncatewords:1 }}</p>
+        </div>
     </div>
 </nav>
 
