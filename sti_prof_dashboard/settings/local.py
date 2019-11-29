@@ -26,3 +26,5 @@ MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
 INSTALLED_APPS += ['debug_toolbar',]
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+
+TABLEAU_BASE_URL = "https://tableau-tst.epfl.ch/trusted/"

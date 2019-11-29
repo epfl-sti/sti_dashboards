@@ -27,10 +27,26 @@
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
 
 <script type="text/javascript">
+function get_tableau_token(){
+    var token = '';
+    endpoint = '{% url 'dashboard:get_tableau_token' %}';
+    $.ajax({
+        url: endpoint,
+        async: false,
+        complete: function(jqXHR, textStatus){
+            token= jqXHR.responseText;
+        },
+    });
+
+    return token;
+}
+
 function initVizContainer_summary() {
+    var token = get_tableau_token();
+
     var containerSize = $("#vizContainer_summary").parent()[0].clientWidth;
     var vizContainer_summary_containerDiv = document.getElementById("vizContainer_summary"),
-    url = "https://tableau.epfl.ch/views/space/personal_summary",
+    url = `{{ tableau_base_url }}${token}/views/space/personal_summary`,
     options = {
         hideTabs: true,
         hideToolbar: true,
@@ -49,9 +65,11 @@ function initVizContainer_summary() {
 }
 
 function initVizContainer_figures() {
+    var token = get_tableau_token();
+
     var containerSize = $("#vizContainer_figures").parent()[0].clientWidth;
     var vizContainer_figures_containerDiv = document.getElementById("vizContainer_figures"),
-    url = "https://tableau.epfl.ch/views/space/personal_figures",
+    url = `{{ tableau_base_url }}${token}/views/space/personal_figures`,
     options = {
         hideTabs: true,
         hideToolbar: true,
@@ -66,7 +84,6 @@ $(document).ready(function(){
     initVizContainer_summary();
     initVizContainer_figures();
 })
-
 </script>
 
 {% endblock%}

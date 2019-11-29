@@ -27,13 +27,29 @@
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
 
 <script type="text/javascript">
+function get_tableau_token(){
+    var token = '';
+    endpoint = '{% url 'dashboard:get_tableau_token' %}';
+    $.ajax({
+        url: endpoint,
+        async: false,
+        complete: function(jqXHR, textStatus){
+            token= jqXHR.responseText;
+        },
+    });
+
+    return token;
+}
+
 function initVizContainer_summary() {
+    var token = get_tableau_token();
+
     // Calculates the width of the parent container so the vizualization takes the full width of the screen
     // the minus 40 pixels is here to take into account the margins and padding to the parent tab
     var containerSize = $("#vizContainer_summary").parents('div.container-full')[0].clientWidth - 40;
 
     var vizContainer_summary_containerDiv = document.getElementById("vizContainer_summary"),
-    url = "https://tableau.epfl.ch/views/finance/personal_summary",
+    url = `{{ tableau_base_url }}${token}/views/finance/personal_summary`,
     options = {
         hideTabs: true,
         hideToolbar: true,
@@ -46,12 +62,14 @@ function initVizContainer_summary() {
 }
 
 function initVizContainer_details() {
+    var token = get_tableau_token();
+
     // Calculates the width of the parent container so the vizualization takes the full width of the screen
     // the minus 40 pixels is here to take into account the margins and padding to the parent tab
     var containerSize = $("#vizContainer_details").parents('div.container-full')[0].clientWidth - 40;
 
     var vizContainer_details_containerDiv = document.getElementById("vizContainer_details"),
-    url = "https://tableau.epfl.ch/views/finance/personal_details",
+    url = `{{ tableau_base_url }}${token}/views/finance/personal_details`,
     options = {
         hideTabs: true,
         hideToolbar: true,

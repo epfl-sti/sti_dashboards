@@ -33,13 +33,29 @@
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
 
 <script type="text/javascript">
+function get_tableau_token(){
+    var token = '';
+    endpoint = '{% url 'dashboard:get_tableau_token' %}';
+    $.ajax({
+        url: endpoint,
+        async: false,
+        complete: function(jqXHR, textStatus){
+            token= jqXHR.responseText;
+        },
+    });
+
+    return token;
+}
+
 function initVizContainer_faculty_summary() {
+    var token = get_tableau_token();
+
     // Calculates the width of the parent container so the vizualization takes the full width of the screen
     // the minus 40 pixels is here to take into account the margins and padding to the parent tab
     var containerSize = $("#vizContainer_faculty_summary").parents('div.container-full')[0].clientWidth - 40;
 
     var vizContainer_faculty_summary_containerDiv = document.getElementById("vizContainer_faculty_summary"),
-    url = "https://tableau.epfl.ch/views/teaching/personal_faculty_summary",
+    url = `{{ tableau_base_url }}${token}/views/teaching/personal_faculty_summary`,
     options = {
         hideTabs: true,
         hideToolbar: true,
@@ -52,12 +68,14 @@ function initVizContainer_faculty_summary() {
 
 
 function initVizContainer_details() {
+    var token = get_tableau_token();
+
     // Calculates the width of the parent container so the vizualization takes the full width of the screen
     // the minus 40 pixels is here to take into account the margins and padding to the parent tab
     var containerSize = $("#vizContainer_details").parents('div.container-full')[0].clientWidth - 40;
 
     var vizContainer_details_containerDiv = document.getElementById("vizContainer_details"),
-    url = "https://tableau.epfl.ch/views/teaching/personal_details",
+    url = `{{ tableau_base_url }}${token}/views/teaching/personal_details`,
     options = {
         hideTabs: true,
         hideToolbar: true,
@@ -81,12 +99,14 @@ function initVizContainer_details() {
 }
 
 function initVizContainer_figures() {
+    var token = get_tableau_token();
+
     // Calculates the width of the parent container so the vizualization takes the full width of the screen
     // the minus 40 pixels is here to take into account the margins and padding to the parent tab
     var containerSize = $("#vizContainer_figures").parents('div.container-full')[0].clientWidth - 40;
 
     var vizContainer_figures_containerDiv = document.getElementById("vizContainer_figures"),
-    url = "https://tableau.epfl.ch/views/teaching/personal_figures",
+    url = `{{ tableau_base_url }}${token}/views/teaching/personal_figures`,
     options = {
         hideTabs: true,
         hideToolbar: true,
@@ -102,7 +122,5 @@ $(document).ready(function(){
     initVizContainer_details();
     initVizContainer_figures();
 })
-
 </script>
-
 {% endblock%}

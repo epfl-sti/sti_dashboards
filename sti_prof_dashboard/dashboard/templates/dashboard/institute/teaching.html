@@ -34,12 +34,14 @@
 
 <script type="text/javascript">
 function initViz_summary() {
+    var token = get_tableau_token();
+
     // Calculates the width of the parent container so the vizualization takes the full width of the screen
     // the minus 40 pixels is here to take into account the margins and padding to the parent tab
     var containerSize = $("#vizContainer_summary").parents('div.container-full')[0].clientWidth - 40;
 
     var containerDiv = document.getElementById("vizContainer_summary"),
-        url = "https://tableau.epfl.ch/views/teaching/institute_summary",
+        url = `{{ tableau_base_url }}${token}/views/teaching/institute_summary`,
         options = {
             hideTabs: true,
             hideToolbar: true,
@@ -52,12 +54,14 @@ function initViz_summary() {
 }
 
 function initViz_details() {
+    var token = get_tableau_token();
+
     // Calculates the width of the parent container so the vizualization takes the full width of the screen
     // the minus 40 pixels is here to take into account the margins and padding to the parent tab
     var containerSize = $("#vizContainer_details").parents('div.container-full')[0].clientWidth - 40;
 
     var containerDiv = document.getElementById("vizContainer_details"),
-        url = "https://tableau.epfl.ch/views/teaching/institute_details",
+        url = `{{ tableau_base_url }}${token}/views/teaching/institute_details`,
         options = {
             hideTabs: true,
             hideToolbar: true,
@@ -70,12 +74,14 @@ function initViz_details() {
 }
 
 function initViz_figures() {
+    var token = get_tableau_token();
+
     // Calculates the width of the parent container so the vizualization takes the full width of the screen
     // the minus 40 pixels is here to take into account the margins and padding to the parent tab
     var containerSize = $("#vizContainer_figures").parents('div.container-full')[0].clientWidth - 40;
 
     var containerDiv = document.getElementById("vizContainer_figures"),
-        url = "https://tableau.epfl.ch/views/teaching/institute_figures",
+        url = `{{ tableau_base_url }}${token}/views/teaching/institute_figures`,
         options = {
             hideTabs: true,
             hideToolbar: true,
@@ -88,11 +94,10 @@ function initViz_figures() {
 }
 
 $(document).ready(function(){
-initViz_summary();
-initViz_details();
-initViz_figures();
+    initViz_summary();
+    initViz_details();
+    initViz_figures();
 })
-
 </script>
 
 {% endblock%}

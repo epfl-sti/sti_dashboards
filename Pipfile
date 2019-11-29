@@ -18,6 +18,7 @@ ldap3 = "*"
 django-url-or-relative-url-field = "*"
 Django = "*"
 django-extensions = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"

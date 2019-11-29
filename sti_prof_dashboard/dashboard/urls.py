@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 from django.views.generic import RedirectView
 from .views import originals
-from .views import v3
+from .views import api, v3
 
 app_name = "dashboard"
 
@@ -14,6 +14,9 @@ urlpatterns = [
      re_path(r'^institute/(?P<institute>(\w|-|_)+)/(?P<category>\w+)/$', v3.generic_institute, name="institute_view"),
      re_path(r'^personal/(?P<sciper>\w+)/(?P<category>\w+)/(?P<subcategory>\w+)/$', v3.generic_personal, name="personal_view"),
      re_path(r'^personal/(?P<sciper>\w+)/(?P<category>\w+)/$', v3.generic_personal, name="personal_view"),
+
+     # v3 APIs
+     path('api/get_tableau_token', api.get_tableau_token, name="get_tableau_token"),
 
      # Originals
 #     path('v2/', originals.index, name="index"),

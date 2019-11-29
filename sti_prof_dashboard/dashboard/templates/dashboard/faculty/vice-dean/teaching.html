@@ -11,26 +11,40 @@
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
 
 <script type="text/javascript">
-    //var viz, sheet;
-        function initViz_01() {
-            var containerSize = $("#vizContainer_01").parent()[0].clientWidth;
-            var containerDiv = document.getElementById("vizContainer_01"),
-                url = "https://tableau.epfl.ch/views/teaching/vice-dean",
-                options = {
-                    hideTabs: true,
-                    hideToolbar: true,
-                    width: containerSize + 'px',
-                    height: '2000px'
-                };
+function get_tableau_token(){
+    var token = '';
+    endpoint = '{% url 'dashboard:get_tableau_token' %}';
+    $.ajax({
+        url: endpoint,
+        async: false,
+        complete: function(jqXHR, textStatus){
+            token= jqXHR.responseText;
+        },
+    });
 
-            viz = new tableau.Viz(containerDiv, url, options);
-        }
+    return token;
+}
+
+function initViz_01() {
+    var token = get_tableau_token();
+
+    var containerSize = $("#vizContainer_01").parent()[0].clientWidth;
+    var containerDiv = document.getElementById("vizContainer_01"),
+        url = `{{ tableau_base_url }}${token}/views/teaching/vice-dean`,
+        options = {
+            hideTabs: true,
+            hideToolbar: true,
+            width: containerSize + 'px',
+            height: '2000px'
+        };
+
+    viz = new tableau.Viz(containerDiv, url, options);
+}
 
 
-    $(document).ready(function(){
-        initViz_01();
-    })
-
+$(document).ready(function(){
+    initViz_01();
+})
 </script>
 
 {% endblock%}

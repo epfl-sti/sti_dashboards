@@ -25,3 +25,5 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+TABLEAU_BASE_URL = "https://tableau.epfl.ch/trusted/"

@@ -22,6 +22,7 @@ def generic_faculty(request, *args, **kwargs):
     category = kwargs.get('category', '')
     subcategory = kwargs.get('subcategory', '')
     context = {
+        'tableau_base_url': settings.TABLEAU_BASE_URL,
         'level': level,
         'role': role,
         'category': category,
@@ -58,6 +59,7 @@ def generic_institute(request, *args, **kwargs):
         raise PermissionDenied()
 
     context = {
+        'tableau_base_url': settings.TABLEAU_BASE_URL,
         'level': 'institute',
         'institute': institute,
         'category': category,
@@ -102,6 +104,7 @@ def generic_personal(request, *args, **kwargs):
     institute = epfl_ldap.get_institute(sciper, official_institutes=settings.STI_INSTITUTES)
 
     context = {
+        'tableau_base_url': settings.TABLEAU_BASE_URL,
         'level': 'personal',
         'sciper': sciper,
         'category': category,
