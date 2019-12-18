@@ -13,7 +13,8 @@
     </ul>
     <div class="tab-content p-3">
         <div class="tab-pane fade show active" id="summary" role="tabpanel" aria-labelledby="summary-tab">
-            <div id="vizContainer_summary"></div>
+            <div id="vizContainer_summary_01"></div>
+            <div id="vizContainer_summary_02"></div>
         </div>
         <div class="tab-pane fade" id="figures" role="tabpanel" aria-labelledby="figures-tab">
             <div id="vizContainer_figures"></div>
@@ -41,48 +42,67 @@ function get_tableau_token(){
     return token;
 }
 
-function initVizContainer_summary() {
-    var token = get_tableau_token();
-
-    var containerSize = $("#vizContainer_summary").parent()[0].clientWidth;
-    var vizContainer_summary_containerDiv = document.getElementById("vizContainer_summary"),
-    url = `{{ tableau_base_url }}${token}/views/space/personal_summary`,
-    options = {
-        hideTabs: true,
-        hideToolbar: true,
-        width: containerSize + 'px',
-        height: '600px',
-        "Institute": '{{ institute }}',
-        onFirstInteractive: function() {
-            viz_container_summary_worksheets = viz_container_summary.getWorkbook().getActiveSheet().getWorksheets();
-
-            // Only highlight the person on the first worksheet.
-            // The coordination across all worksheets is taken care of by a custom action on Tableau
-            viz_container_summary_worksheets[0].selectMarksAsync('Sciper', '{{ sciper }}', tableau.SelectionUpdateType.REPLACE);
-        },
-        };
-    viz_container_summary = new tableau.Viz(vizContainer_summary_containerDiv, url, options);
+function get_tab_width(reference_element_id){
+    return $(reference_element_id).parent()[0].clientWidth
 }
 
-function initVizContainer_figures() {
+function initVizContainer_summary_01(tab_width) {
     var token = get_tableau_token();
 
-    var containerSize = $("#vizContainer_figures").parent()[0].clientWidth;
-    var vizContainer_figures_containerDiv = document.getElementById("vizContainer_figures"),
-    url = `{{ tableau_base_url }}${token}/views/space/personal_figures`,
+    var vizContainer_summary_01_containerDiv = document.getElementById("vizContainer_summary_01"),
+    url = `{{ tableau_base_url }}${token}/views/space/personal_summary_01`,
     options = {
         hideTabs: true,
         hideToolbar: true,
-        width: containerSize + 'px',
+        width: tab_width + 'px',
+        height: '300px',
+        "Institute": '{{ institute }}',
+        onFirstInteractive: function() {
+            viz_container_summary_01.getWorkbook().getActiveSheet().selectMarksAsync('Sciper', '{{ sciper }}', tableau.SelectionUpdateType.REPLACE);
+        },
+        };
+    viz_container_summary_01 = new tableau.Viz(vizContainer_summary_01_containerDiv, url, options);
+}
+
+function initVizContainer_summary_02(tab_width) {
+    var token = get_tableau_token();
+
+    var vizContainer_summary_02_containerDiv = document.getElementById("vizContainer_summary_02"),
+    url = `{{ tableau_base_url }}${token}/views/space/personal_summary_02`,
+    options = {
+        hideTabs: true,
+        hideToolbar: true,
+        width: tab_width + 'px',
+        height: '300px',
+        "Institute": '{{ institute }}',
+        'Sciper': '{{ sciper }}',
+        };
+    viz_container_summary_02 = new tableau.Viz(vizContainer_summary_02_containerDiv, url, options);
+}
+
+function initVizContainer_figures(tab_width) {
+    console.log("Getting an authentication token for the figures VIZ");
+    var token = get_tableau_token();
+
+    var vizContainer_figures_containerDiv = document.getElementById("vizContainer_figures");
+    url = `{{ tableau_base_url }}${token}/views/space/personal_figures`;
+    options = {
+        hideTabs: true,
+        hideToolbar: true,
+        width: tab_width + 'px',
         height: '2000px',
         "Sciper": '{{ sciper }}',
         };
+
     viz_container_figures = new tableau.Viz(vizContainer_figures_containerDiv, url, options);
 }
 
 $(document).ready(function(){
-    initVizContainer_summary();
-    initVizContainer_figures();
+    var tab_width = get_tab_width("#vizContainer_summary_01");
+
+    initVizContainer_summary_01(tab_width);
+    initVizContainer_summary_02(tab_width);
+    initVizContainer_figures(tab_width);
 })
 </script>
 
