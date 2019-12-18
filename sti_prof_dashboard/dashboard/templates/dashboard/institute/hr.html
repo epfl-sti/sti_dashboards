@@ -47,19 +47,19 @@ function get_tableau_token(){
     return token;
 }
 
-function initViz_summary() {
-    var token = get_tableau_token();
+function get_tab_width(reference_element_id){
+    return $(reference_element_id).parent()[0].clientWidth
+}
 
-    // Calculates the width of the parent container so the vizualization takes the full width of the screen
-    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
-    var containerSize = $("#vizContainer_summary").parents('div.container-full')[0].clientWidth - 40;
+function initViz_summary(tab_width) {
+    var token = get_tableau_token();
 
     var containerDiv = document.getElementById("vizContainer_summary"),
         url = `{{ tableau_base_url }}${token}/views/hr/institute_summary`,
         options = {
             hideTabs: true,
             hideToolbar: true,
-            width: containerSize + 'px',
+            width: tab_width + 'px',
             height: '2000px',
             'Institute': '{{ institute }}'
         };
@@ -67,19 +67,15 @@ function initViz_summary() {
     viz = new tableau.Viz(containerDiv, url, options);
 }
 
-function initViz_details() {
+function initViz_details(tab_width) {
     var token = get_tableau_token();
-
-    // Calculates the width of the parent container so the vizualization takes the full width of the screen
-    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
-    var containerSize = $("#vizContainer_details").parents('div.container-full')[0].clientWidth - 40;
 
     var containerDiv = document.getElementById("vizContainer_details"),
         url = `{{ tableau_base_url }}${token}/views/hr/institute_details`,
         options = {
             hideTabs: true,
             hideToolbar: true,
-            width: container + 'px',
+            width: tab_width + 'px',
             height: '2000px',
             'Institute': '{{ institute }}'
         };
@@ -87,19 +83,15 @@ function initViz_details() {
     viz = new tableau.Viz(containerDiv, url, options);
 }
 
-function initViz_figures() {
+function initViz_figures(tab_width) {
     var token = get_tableau_token();
-
-    // Calculates the width of the parent container so the vizualization takes the full width of the screen
-    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
-    var containerSize = $("#vizContainer_figures").parents('div.container-full')[0].clientWidth - 40;
 
     var containerDiv = document.getElementById("vizContainer_figures"),
         url = `{{ tableau_base_url }}${token}/views/hr/institute_figures`,
         options = {
             hideTabs: true,
             hideToolbar: true,
-            width: containerSize + 'px',
+            width: tab_width + 'px',
             height: '2000px',
             'Institute': '{{ institute }}'
         };
@@ -108,9 +100,10 @@ function initViz_figures() {
 }
 
 $(document).ready(function(){
-initViz_summary();
-initViz_details();
-initViz_figures();
+    var tab_width = get_tab_width("#vizContainer_summary");
+    initViz_summary(tab_width);
+    initViz_details(tab_width);
+    initViz_figures(tab_width);
 })
 
 </script>
