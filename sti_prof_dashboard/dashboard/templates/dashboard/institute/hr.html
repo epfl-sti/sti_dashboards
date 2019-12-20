@@ -31,81 +31,85 @@
 
 {% block scripts_end_of_page_content %}
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/epfl_tableau_common.js' %}"></script>
 
 <script type="text/javascript">
-function get_tableau_token(){
-    var token = '';
-    endpoint = '{% url 'dashboard:get_tableau_token' %}';
-    $.ajax({
-        url: endpoint,
-        async: false,
-        complete: function(jqXHR, textStatus){
-            token= jqXHR.responseText;
-        },
+function initViz_summary(tokenURI, vizWidth) {
+    return new Promise((resolve, reject) => {
+        get_tableau_token(tokenURI)
+        .then((token) => {
+            let containerDiv = $("#vizContainer_summary");
+            let url = `{{ tableau_base_url }}${token}/views/hr/institute_summary`;
+            let options = {
+                hideTabs: true,
+                hideToolbar: true,
+                width: vizWidth + 'px',
+                height: '2000px',
+                'Institute': '{{ institute }}'
+                };
+            let viz = new tableau.Viz(containerDiv.the(), url, options);
+            resolve("sucessfully created vizualization");
+            })
+        .catch((message) => {
+            reject(message);
+        })
     });
-
-    return token;
 }
 
-function get_tab_width(reference_element_id){
-    return $(reference_element_id).parent()[0].clientWidth
+function initViz_details(tokenURI, vizWidth) {
+    return new Promise((resolve, reject) => {
+        get_tableau_token(tokenURI)
+        .then((token) => {
+            let containerDiv = $("#vizContainer_details");
+            let url = `{{ tableau_base_url }}${token}/views/hr/institute_details`;
+            let options = {
+                hideTabs: true,
+                hideToolbar: true,
+                width: vizWidth + 'px',
+                height: '2000px',
+                'Institute': '{{ institute }}'
+                };
+            let viz = new tableau.Viz(containerDiv.the(), url, options);
+            resolve("sucessfully created vizualization");
+            })
+        .catch((message) => {
+            reject(message);
+        })
+    });
 }
 
-function initViz_summary(tab_width) {
-    var token = get_tableau_token();
-
-    var containerDiv = document.getElementById("vizContainer_summary"),
-        url = `{{ tableau_base_url }}${token}/views/hr/institute_summary`,
-        options = {
-            hideTabs: true,
-            hideToolbar: true,
-            width: tab_width + 'px',
-            height: '2000px',
-            'Institute': '{{ institute }}'
-        };
-
-    viz = new tableau.Viz(containerDiv, url, options);
-}
-
-function initViz_details(tab_width) {
-    var token = get_tableau_token();
-
-    var containerDiv = document.getElementById("vizContainer_details"),
-        url = `{{ tableau_base_url }}${token}/views/hr/institute_details`,
-        options = {
-            hideTabs: true,
-            hideToolbar: true,
-            width: tab_width + 'px',
-            height: '2000px',
-            'Institute': '{{ institute }}'
-        };
-
-    viz = new tableau.Viz(containerDiv, url, options);
-}
-
-function initViz_figures(tab_width) {
-    var token = get_tableau_token();
-
-    var containerDiv = document.getElementById("vizContainer_figures"),
-        url = `{{ tableau_base_url }}${token}/views/hr/institute_figures`,
-        options = {
-            hideTabs: true,
-            hideToolbar: true,
-            width: tab_width + 'px',
-            height: '2000px',
-            'Institute': '{{ institute }}'
-        };
-
-    viz = new tableau.Viz(containerDiv, url, options);
+function initViz_figures(tokenURI, vizWidth) {
+    return new Promise((resolve, reject) => {
+        get_tableau_token(tokenURI)
+        .then((token) => {
+            let containerDiv = $("#vizContainer_figures");
+            let url = `{{ tableau_base_url }}${token}/views/hr/institute_figures`;
+            let options = {
+                hideTabs: true,
+                hideToolbar: true,
+                width: vizWidth + 'px',
+                height: '2000px',
+                'Institute': '{{ institute }}'
+                };
+            let viz = new tableau.Viz(containerDiv.the(), url, options);
+            resolve("sucessfully created vizualization");
+            })
+        .catch((message) => {
+            reject(message);
+        })
+    });
 }
 
 $(document).ready(function(){
-    var tab_width = get_tab_width("#vizContainer_summary");
-    initViz_summary(tab_width);
-    initViz_details(tab_width);
-    initViz_figures(tab_width);
-})
+    let tokenURI = '{% url 'dashboard:get_tableau_token' %}';
+    let vizWidth = $("#vizContainer_summary").parent().the().clientWidth;
 
+    Promise.all([
+        initViz_summary(tokenURI, vizWidth),
+        initViz_details(tokenURI, vizWidth),
+        initViz_figures(tokenURI, vizWidth)
+    ]);
+})
 </script>
 
 {% endblock%}

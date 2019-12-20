@@ -26,83 +26,88 @@
 
 {% block scripts_end_of_page_content %}
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/epfl_tableau_common.js' %}"></script>
 
 <script type="text/javascript">
-function get_tableau_token(){
-    var token = '';
-    endpoint = '{% url 'dashboard:get_tableau_token' %}';
-    $.ajax({
-        url: endpoint,
-        async: false,
-        complete: function(jqXHR, textStatus){
-            token= jqXHR.responseText;
-        },
+function initVizSummary_01(tokenURI, vizWidth){
+    return new Promise((resolve, reject) => {
+        get_tableau_token(tokenURI)
+        .then((token) => {
+            let containerDiv = $("#vizContainer_summary_01");
+            let url = `{{ tableau_base_url }}${token}/views/space/personal_summary_01`;
+            let options = {
+                hideTabs: true,
+                hideToolbar: true,
+                width: vizWidth + 'px',
+                height: '300px',
+                'Institute': '{{ institute }}',
+                onFirstInteractive: function(e) {
+                    e.getViz().getWorkbook().getActiveSheet().selectMarksAsync('Sciper', '{{ sciper }}', tableau.SelectionUpdateType.REPLACE)
+                    },
+                };
+            let viz = new tableau.Viz(containerDiv.the(), url, options);
+            resolve("sucessfully created vizualization");
+            })
+        .catch((message) => {
+            reject(message);
+        })
     });
 
-    return token;
 }
 
-function get_tab_width(reference_element_id){
-    return $(reference_element_id).parent()[0].clientWidth
+function initVizSummary_02(tokenURI, vizWidth){
+    return new Promise((resolve, reject) => {
+        get_tableau_token(tokenURI)
+        .then((token) => {
+            let containerDiv = $("#vizContainer_summary_02");
+            let url = `{{ tableau_base_url }}${token}/views/space/personal_summary_02`;
+            let options = {
+                hideTabs: true,
+                hideToolbar: true,
+                width: vizWidth + 'px',
+                height: '300px',
+                'Institute': '{{ institute }}',
+                'Sciper': '{{ sciper }}',};
+            let viz = new tableau.Viz(containerDiv.the(), url, options);
+            resolve("sucessfully created vizualization");
+            })
+        .catch((message) => {
+            reject(message);
+        })
+    });
 }
 
-function initVizContainer_summary_01(tab_width) {
-    var token = get_tableau_token();
-
-    var vizContainer_summary_01_containerDiv = document.getElementById("vizContainer_summary_01"),
-    url = `{{ tableau_base_url }}${token}/views/space/personal_summary_01`,
-    options = {
-        hideTabs: true,
-        hideToolbar: true,
-        width: tab_width + 'px',
-        height: '300px',
-        "Institute": '{{ institute }}',
-        onFirstInteractive: function() {
-            viz_container_summary_01.getWorkbook().getActiveSheet().selectMarksAsync('Sciper', '{{ sciper }}', tableau.SelectionUpdateType.REPLACE);
-        },
-        };
-    viz_container_summary_01 = new tableau.Viz(vizContainer_summary_01_containerDiv, url, options);
-}
-
-function initVizContainer_summary_02(tab_width) {
-    var token = get_tableau_token();
-
-    var vizContainer_summary_02_containerDiv = document.getElementById("vizContainer_summary_02"),
-    url = `{{ tableau_base_url }}${token}/views/space/personal_summary_02`,
-    options = {
-        hideTabs: true,
-        hideToolbar: true,
-        width: tab_width + 'px',
-        height: '300px',
-        "Institute": '{{ institute }}',
-        'Sciper': '{{ sciper }}',
-        };
-    viz_container_summary_02 = new tableau.Viz(vizContainer_summary_02_containerDiv, url, options);
-}
-
-function initVizContainer_figures(tab_width) {
-    console.log("Getting an authentication token for the figures VIZ");
-    var token = get_tableau_token();
-
-    var vizContainer_figures_containerDiv = document.getElementById("vizContainer_figures");
-    url = `{{ tableau_base_url }}${token}/views/space/personal_figures`;
-    options = {
-        hideTabs: true,
-        hideToolbar: true,
-        width: tab_width + 'px',
-        height: '2000px',
-        "Sciper": '{{ sciper }}',
-        };
-
-    viz_container_figures = new tableau.Viz(vizContainer_figures_containerDiv, url, options);
+function initViz_figures(tokenURI, vizWidth) {
+    return new Promise((resolve, reject) => {
+        get_tableau_token(tokenURI)
+        .then((token) => {
+            let containerDiv = $("#vizContainer_figures");
+            let url = `{{ tableau_base_url }}${token}/views/space/personal_figures`;
+            let options = {
+                hideTabs: true,
+                hideToolbar: true,
+                width: vizWidth + 'px',
+                height: '2000px',
+                'Sciper': '{{ sciper }}',
+                };
+            let viz = new tableau.Viz(containerDiv.the(), url, options);
+            resolve("sucessfully created vizualization");
+            })
+        .catch((message) => {
+            reject(message);
+        })
+    });
 }
 
 $(document).ready(function(){
-    var tab_width = get_tab_width("#vizContainer_summary_01");
+    let tokenURI = '{% url 'dashboard:get_tableau_token' %}';
+    let vizWidth = $("#vizContainer_summary_01").parent().the().clientWidth;
 
-    initVizContainer_summary_01(tab_width);
-    initVizContainer_summary_02(tab_width);
-    initVizContainer_figures(tab_width);
+    Promise.all([
+        initVizSummary_01(tokenURI, vizWidth),
+        initVizSummary_02(tokenURI, vizWidth),
+        initViz_figures(tokenURI, vizWidth)
+    ]);
 })
 </script>
 

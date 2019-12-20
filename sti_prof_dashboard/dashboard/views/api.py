@@ -11,5 +11,6 @@ from epfl.sti.helpers import tableau
 def get_tableau_token(request):
     if request.is_ajax():
         token = tableau.get_Tableau_trusted_authentication_token(settings.TABLEAU_BASE_URL)
+        token = json.dumps(token)
         mimetype = 'application/json'
         return HttpResponse(token, mimetype)

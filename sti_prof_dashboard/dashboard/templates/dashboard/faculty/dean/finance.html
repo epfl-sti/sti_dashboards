@@ -9,43 +9,41 @@
 
 {% block scripts_end_of_page_content %}
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/epfl_tableau_common.js' %}"></script>
 
 <script type="text/javascript">
-function get_tableau_token(){
-    var token = '';
-    endpoint = '{% url 'dashboard:get_tableau_token' %}';
-    $.ajax({
-        url: endpoint,
-        async: false,
-        complete: function(jqXHR, textStatus){
-            token= jqXHR.responseText;
-        },
+function initViz_01(tokenURI) {
+    return new Promise((resolve, reject) => {
+        get_tableau_token(tokenURI)
+        .then((token) => {
+            let containerDiv = $("#vizContainer_01");
+            let containerSize = containerDiv.parent().the().clientWidth;
+            let url = `{{ tableau_base_url }}${token}/views/finance/dean`;
+            let options = {
+                hideTabs: true,
+                hideToolbar: true,
+                width: containerSize + 'px',
+                height: '2000px',
+                };
+            let viz = new tableau.Viz(containerDiv.the(), url, options);
+            resolve("sucessfully created vizualization");
+            })
+        .catch((message) => {
+            reject(message);
+        })
     });
-
-    return token;
 }
-
-function initViz_01() {
-    var token = get_tableau_token();
-
-    var containerSize = $("#vizContainer_01").parent()[0].clientWidth;
-    var containerDiv = document.getElementById("vizContainer_01"),
-        url = `{{ tableau_base_url }}${token}/views/finance/dean`,
-        options = {
-            hideTabs: true,
-            hideToolbar: true,
-            width: containerSize + 'px',
-            height: '2000px'
-        };
-
-    viz = new tableau.Viz(containerDiv, url, options);
-}
-
 
 $(document).ready(function(){
-    initViz_01();
+    let tokenURI = '{% url 'dashboard:get_tableau_token' %}';
+    initViz_01(tokenURI)
+    .then((message)=>{
+        console.log(message);
+    })
+    .catch((message)=>{
+        console.log(message);
+    });
 })
-
 </script>
 
 {% endblock%}

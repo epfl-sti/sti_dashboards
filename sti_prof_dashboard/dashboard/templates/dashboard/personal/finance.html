@@ -25,67 +25,64 @@
 
 {% block scripts_end_of_page_content %}
 <script type="text/javascript" src="{% static 'dashboard/js/tableau-2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dashboard/js/epfl_tableau_common.js' %}"></script>
 
 <script type="text/javascript">
-function get_tableau_token(){
-    var token = '';
-    endpoint = '{% url 'dashboard:get_tableau_token' %}';
-    $.ajax({
-        url: endpoint,
-        async: false,
-        complete: function(jqXHR, textStatus){
-            token= jqXHR.responseText;
-        },
+function initViz_summary(tokenURI, vizWidth) {
+    return new Promise((resolve, reject) => {
+        get_tableau_token(tokenURI)
+        .then((token) => {
+            let containerDiv = $("#vizContainer_summary");
+            let url = `{{ tableau_base_url }}${token}/views/finance/personal_summary`;
+            let options = {
+                hideTabs: true,
+                hideToolbar: true,
+                width: vizWidth + 'px',
+                height: '2000px',
+                'Institute': '{{ institute }}',
+                "Unit's manager ID": '{{ sciper }}',
+                };
+            let viz = new tableau.Viz(containerDiv.the(), url, options);
+            resolve("sucessfully created vizualization");
+            })
+        .catch((message) => {
+            reject(message);
+        })
     });
-
-    return token;
 }
 
-function initVizContainer_summary() {
-    var token = get_tableau_token();
-
-    // Calculates the width of the parent container so the vizualization takes the full width of the screen
-    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
-    var containerSize = $("#vizContainer_summary").parents('div.container-full')[0].clientWidth - 40;
-
-    var vizContainer_summary_containerDiv = document.getElementById("vizContainer_summary"),
-    url = `{{ tableau_base_url }}${token}/views/finance/personal_summary`,
-    options = {
-        hideTabs: true,
-        hideToolbar: true,
-        width: containerSize + 'px',
-        height: '2000px',
-        'Institute': '{{ institute }}',
-        "Unit's manager ID": '{{ sciper }}',
-        };
-    viz_container_summary = new tableau.Viz(vizContainer_summary_containerDiv, url, options);
-}
-
-function initVizContainer_details() {
-    var token = get_tableau_token();
-
-    // Calculates the width of the parent container so the vizualization takes the full width of the screen
-    // the minus 40 pixels is here to take into account the margins and padding to the parent tab
-    var containerSize = $("#vizContainer_details").parents('div.container-full')[0].clientWidth - 40;
-
-    var vizContainer_details_containerDiv = document.getElementById("vizContainer_details"),
-    url = `{{ tableau_base_url }}${token}/views/finance/personal_details`,
-    options = {
-        hideTabs: true,
-        hideToolbar: true,
-        width: containerSize + 'px',
-        height: '2000px',
-        'Institute': '{{ institute }}',
-        "Unit's manager ID": '{{ sciper }}',
-        };
-    viz_container_details = new tableau.Viz(vizContainer_details_containerDiv, url, options);
+function initViz_details(tokenURI, vizWidth) {
+    return new Promise((resolve, reject) => {
+        get_tableau_token(tokenURI)
+        .then((token) => {
+            let containerDiv = $("#vizContainer_details");
+            let url = `{{ tableau_base_url }}${token}/views/finance/personal_details`;
+            let options = {
+                hideTabs: true,
+                hideToolbar: true,
+                width: vizWidth + 'px',
+                height: '2000px',
+                'Institute': '{{ institute }}',
+                "Unit's manager ID": '{{ sciper }}',
+                };
+            let viz = new tableau.Viz(containerDiv.the(), url, options);
+            resolve("sucessfully created vizualization");
+            })
+        .catch((message) => {
+            reject(message);
+        })
+    });
 }
 
 $(document).ready(function(){
-    initVizContainer_summary();
-    initVizContainer_details();
-})
+    let tokenURI = '{% url 'dashboard:get_tableau_token' %}';
+    let vizWidth = $("#vizContainer_summary").parent().the().clientWidth;
 
+    Promise.all([
+        initViz_summary(tokenURI, vizWidth),
+        initViz_details(tokenURI, vizWidth),
+    ]);
+})
 </script>
 
 {% endblock%}
