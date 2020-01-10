@@ -14,7 +14,7 @@ from epfl.sti.helpers import ldap as epfl_ldap
 @cache_control(max_age=3600)
 @vary_on_cookie
 def generic_faculty(request, *args, **kwargs):
-    if not request.user.get_is_dean() and not request.user.get_is_vice_dean():
+    if not request.user.get_is_dean() and not request.user.get_is_associate_dean():
         raise PermissionDenied()
 
     level = 'faculty'
@@ -51,7 +51,7 @@ def generic_institute(request, *args, **kwargs):
 
     # authorizations (this comes after the arguments retrieval because we need to know the institute)
     is_allowed = False
-    if request.user.get_is_dean() or request.user.get_is_vice_dean():
+    if request.user.get_is_dean() or request.user.get_is_associate_dean():
         is_allowed = True
     if institute in request.user.get_managed_institutes():
         is_allowed = True
@@ -87,7 +87,7 @@ def generic_personal(request, *args, **kwargs):
 
     # authorizations (this comes after the arguments retrieval because we need to know the institute)
     is_allowed = False
-    if request.user.get_is_dean() or request.user.get_is_vice_dean():
+    if request.user.get_is_dean() or request.user.get_is_associate_dean():
         is_allowed = True
     if not is_allowed:
         accessed_person = Person.objects.get(sciper=sciper)

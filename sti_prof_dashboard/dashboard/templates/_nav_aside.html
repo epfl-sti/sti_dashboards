@@ -4,7 +4,7 @@
         <ul>
             <li><a href="{% url 'dashboard:index' %}">About</a></li>
             {# Faculty block #}
-            {% comment %} {% if request.user.get_is_dean or request.user.get_is_vice_dean %} {% endcomment %}
+            {% comment %} {% if request.user.get_is_dean or request.user.get_is_associate_dean %} {% endcomment %}
             {% if request.user.get_is_dean %}
                 <li><a>Faculty</a>
                     <ul>
@@ -17,25 +17,25 @@
             {% endif %}
 
             {# Vice-dean view #}
-            {% comment %} {% if request.user.get_is_dean or request.user.get_is_vice_dean %} {% endcomment %}
-            {% if request.user.get_is_vice_dean %}
-                <li><a>Faculty (vice-dean)</a>
+            {% comment %} {% if request.user.get_is_dean or request.user.get_is_associate_dean %} {% endcomment %}
+            {% if request.user.get_is_associate_dean %}
+                <li><a>Faculty (associate-deans)</a>
                     <ul>
-                        <li><a  href="{% url 'dashboard:faculty_view' 'vice-dean' 'teaching' %}">Teaching</a></li>
-                        <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'finance' %}">Finance</a></li>
-                        <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'hr' %}">Human Resources</a></li>
-                        <li><a href="{% url 'dashboard:faculty_view' 'vice-dean' 'space' %}">Space</a></li>
+                        <li><a  href="{% url 'dashboard:faculty_view' 'associate-deans' 'teaching' %}">Teaching</a></li>
+                        <li><a href="{% url 'dashboard:faculty_view' 'associate-deans' 'finance' %}">Finance</a></li>
+                        <li><a href="{% url 'dashboard:faculty_view' 'associate-deans' 'hr' %}">Human Resources</a></li>
+                        <li><a href="{% url 'dashboard:faculty_view' 'associate-deans' 'space' %}">Space</a></li>
                     </ul>
                 </li>
             {% endif %}
 
             {# Institutes block #}
-            {% comment %} {% if request.user.get_managed_institutes or request.user.get_is_dean or request.user.get_is_vice_dean %} {% endcomment %}
+            {% comment %} {% if request.user.get_managed_institutes or request.user.get_is_dean or request.user.get_is_associate_dean %} {% endcomment %}
             {% if request.user.get_managed_institutes %}
                 <li><a>Institutes</a>
                     <ul>
                         {% for key, value in INSTITUTES.items %}
-                            {% if request.user.get_is_dean or request.user.get_is_vice_dean or key in request.user.get_managed_institutes %}
+                            {% if request.user.get_is_dean or request.user.get_is_associate_dean or key in request.user.get_managed_institutes %}
                                 <li><a>{{ value }}</a>
                                     <ul>
                                         <li><a href="{% url 'dashboard:institute_view' key 'teaching' %}">Teaching</a></li>
