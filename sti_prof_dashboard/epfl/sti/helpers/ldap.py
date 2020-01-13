@@ -179,9 +179,9 @@ def get_ou_info(ou_dn):
     conn.search(ou_dn, filter, BASE, attributes=['description;lang-en', 'ou', 'description'])
     assert len(conn.entries) == 1
     entry = conn.entries[0]
-    if entry['description;lang-en'] is not None:
+    if entry['description;lang-en'].value is not None:
         unit_description = min(entry['description;lang-en'], key=len)
-    elif entry['description'] is not None:
+    elif entry['description'].value is not None:
         unit_description = min(entry['description'], key=len)
     else:
         unit_description = ''
