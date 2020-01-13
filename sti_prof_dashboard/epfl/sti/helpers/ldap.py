@@ -176,10 +176,15 @@ def get_ou_info(ou_dn):
     filter = '(objectClass=*)'
     ldap_server = Server(ldap_host, use_ssl=True, get_info=ALL)
     conn = Connection(ldap_server, auto_bind=True)
-    conn.search(ou_dn, filter, BASE, attributes=['description;lang-en', 'ou'])
+    conn.search(ou_dn, filter, BASE, attributes=['description;lang-en', 'ou', 'description'])
     assert len(conn.entries) == 1
     entry = conn.entries[0]
-    unit_description = min(entry['description;lang-en'], key=len)
+    if entry['description;lang-en'] is not None:
+        unit_description = min(entry['description;lang-en'], key=len)
+    elif entry['description'] is not None:
+        unit_description = min(entry['description'], key=len)
+    else:
+        unit_description = ''
     unit_description = unit_description.lower()
     if 'institute' in unit_description:
         return True, min(entry['ou'], key=len)
