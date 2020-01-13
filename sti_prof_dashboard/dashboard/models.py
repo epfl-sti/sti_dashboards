@@ -55,8 +55,8 @@ class Person(AbstractUser):
 
         return institutes
 
-    def set_managed_institutes(self, value):
-        self._managed_institutes = json.dumps(value)
+    # def set_managed_institutes(self, value):
+    #     self._managed_institutes = json.dumps(value)
 
     picture_url = URLOrRelativeURLField(blank=True, null=True, default=None)
     delegates = models.ManyToManyField("self", symmetrical=False, blank=True, null=True, default=None)
@@ -119,19 +119,19 @@ def check_authorizations(sender, user, request, **kwargs):
     user.set_is_dean(is_dean)
 
     # Check if the user manages institutes
-    is_institute_manager = False
-    managed_institutes = list()
+    # is_institute_manager = False
+    # managed_institutes = list()
 
-    base_dn = 'ou=sti,o=epfl,c=ch'
-    filter = '(&(description;lang-en=*institute*)(unitManager={}))'.format(user.sciper)
-    conn.search(base_dn, filter, search_scope=LEVEL, attributes=['ou'])
-    if len(conn.entries) > 0:
-        is_institute_manager = True
-        for entry in conn.entries:
-            managed_institutes.append(min(entry['ou'], key=len))
+    # base_dn = 'ou=sti,o=epfl,c=ch'
+    # filter = '(&(description;lang-en=*institute*)(unitManager={}))'.format(user.sciper)
+    # conn.search(base_dn, filter, search_scope=LEVEL, attributes=['ou'])
+    # if len(conn.entries) > 0:
+    #     is_institute_manager = True
+    #     for entry in conn.entries:
+    #         managed_institutes.append(min(entry['ou'], key=len))
 
-    user.is_institute_manager = is_institute_manager
-    user.set_managed_institutes(managed_institutes)
+    # user.is_institute_manager = is_institute_manager
+    # user.set_managed_institutes(managed_institutes)
 
     # Check if the user is a prof
     is_prof = False
