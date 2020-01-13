@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 from os.path import abspath, dirname, join
 from dotenv import load_dotenv
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 DOTENV_PATH = join(dirname(dirname(dirname(abspath(__file__)))) ,'.env')
 load_dotenv(dotenv_path=DOTENV_PATH, verbose=True)
@@ -146,3 +148,13 @@ APP_BASE_URL = os.environ.get('DJANGO_APP_BASE_URL', 'https://localhost')
 
 
 STI_INSTITUTES = ['IBI-STI', 'IEL', 'IGM', 'IMT', 'IMX']
+
+
+sentry_sdk.init(
+    dsn="https://1845864e71354db2b404ad69b42279e1@sentry.io/1878562",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)

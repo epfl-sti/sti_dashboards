@@ -19,6 +19,7 @@ django-url-or-relative-url-field = "*"
 Django = "*"
 django-extensions = "*"
 requests = "*"
+sentry-sdk = "*"
 
 [requires]
 python_version = "3.7"
