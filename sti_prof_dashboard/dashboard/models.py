@@ -45,7 +45,7 @@ class Person(AbstractUser):
 
         # Load the institutes managed by the person itself
         already_checked_users.append(self.sciper)
-        if self._managed_institutes is not None:
+        if self._managed_institutes != '' and self._managed_institutes is not None:
             institutes.extend(json.loads(self._managed_institutes))
 
         # Load the institutes managed through delegation
