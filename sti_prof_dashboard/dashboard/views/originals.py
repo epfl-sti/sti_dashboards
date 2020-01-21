@@ -14,36 +14,11 @@ from epfl.sti.helpers import ldap as epfl_ldap
 @cache_control(max_age=3600)
 @vary_on_cookie
 def index(request):
-    next_steps = list()
-    next_step_1 = NextStep()
-    next_step_1.title = "Teaching"
-    next_step_1.description = "This section contains all the statistics about your teaching activities. Typically, you will find information about the ECTS credits and hours you taught."
-    next_step_1.link = reverse('dashboard:teaching')
-    next_steps.append(next_step_1)
-
-    next_step_2 = NextStep()
-    next_step_2.title = "Finance"
-    next_step_2.description = "This section contains all statistics about the financial aspects of STI"
-    next_step_2.link = reverse('dashboard:finance')
-    next_steps.append(next_step_2)
-
-    next_step_3 = NextStep()
-    next_step_3.title = "Human Resources"
-    next_step_3.description = "This section contains all the statistics about the HR aspects. Typically, you will find information about the number of persons per institute and lab as well as gender equality statistics."
-    next_step_3.link = reverse('dashboard:hr')
-    next_steps.append(next_step_3)
-
-    next_step_4 = NextStep()
-    next_step_4.title = "Campus"
-    next_step_4.description = "This section contains all statistics about the areas used by the STI faculty"
-    next_step_4.link = reverse('dashboard:campus')
-    next_steps.append(next_step_4)
-
     context = {
-        'image_relative_path': 'dashboard/img/image_largeprvw.jpeg',
-        'title': 'STI dashboards',
-        'details': "You will find a bird's eye view on the statistics related to your activities at STI. Dashboards on data such as the number of ECTS credits you taught can be found in the menu on the left hand side.",
-        'nextsteps': next_steps}
+        'image_relative_path': 'dashboard/img/Double Frame Bridge Sextant - 1798.jpg',
+        'title': 'School of engineering dashboards',
+        'details': "You will find information related to your statistics within the school of engineering.",
+        }
     response = render(request, 'generic_section_page.html', context=context)
     patch_cache_control(response, private=True)
     return response
