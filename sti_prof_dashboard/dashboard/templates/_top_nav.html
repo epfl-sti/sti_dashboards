@@ -1,6 +1,4 @@
-{% load cache %}
 {% load static %}
-{% cache 600 top_nav  request.user.username %}
 <ul aria-hidden="true" class="nav-header d-none d-xl-flex">
     <li id="menu-item-1">
         <a class="nav-item" href="https://www.epfl.ch/about/" target="_blank">About</a>
@@ -34,4 +32,3 @@
         </div>
     </div>
 </nav>
-{% endcache %}
