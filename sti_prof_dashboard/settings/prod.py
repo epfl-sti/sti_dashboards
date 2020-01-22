@@ -1,6 +1,10 @@
-from .base import *
-import os
 import distutils.util
+import os
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = distutils.util.strtobool(os.environ.get('DJANGO_DEBUG')) or False
@@ -27,3 +31,13 @@ DATABASES = {
 }
 
 TABLEAU_BASE_URL = "https://tableau.epfl.ch/trusted/"
+
+sentry_sdk.init(
+    dsn="https://1845864e71354db2b404ad69b42279e1@sentry.io/1878562",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True,
+    environment="prod",
+)
