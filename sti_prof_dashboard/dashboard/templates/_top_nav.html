@@ -25,7 +25,7 @@
             <img src="{% static 'dashboard/img/sti_logo.png'%}" alt="Logo EPFL, École polytechnique fédérale de Lausanne">
         </div>
         <a class="avatar-teaser-img-placeholder" href="https://people.epfl.ch/{{ request.user.sciper }}" target="_blank">
-            <img src="{{ request.user.picture_url|default_if_none:'/static/dashboard/img/user.png' }}">
+            <img src="{{ PHOTO_URL }}" style="border-radius: 50%; height: auto; width: auto; max-width: 50px; max-height:50px">
         </a>
         <div class="avatar-teaser-body">
             <p>{{ request.user.last_name }}, {{ request.user.first_name|truncatewords:1 }}</p>

@@ -1,0 +1,24 @@
+-i https://pypi.org/simple
+asgiref==3.2.3
+certifi==2019.11.28
+chardet==3.0.4
+django-debug-toolbar==2.1
+django-extensions==2.2.6
+django-sslserver==0.22
+django-url-or-relative-url-field==0.1.2
+django==3.0.2
+gunicorn==20.0.4
+idna==2.8
+ldap3==2.6.1
+postgres==3.0.0
+psycopg2-binary==2.8.4
+psycopg2-pool==1.1
+pyasn1==0.4.8
+python-dotenv==0.10.5
+python-memcached==1.59
+pytz==2019.3
+requests==2.22.0
+sentry-sdk==0.14.1
+six==1.14.0
+sqlparse==0.3.0
+urllib3==1.25.8
