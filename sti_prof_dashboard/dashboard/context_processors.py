@@ -25,7 +25,7 @@ def get_photo_url(request):
 
     cached_value = cache.get(cache_key)
     if cached_value:
-        return cached_value
+        return {'PHOTO_URL': cached_value}
 
     return_value = '/static/dashboard/img/user.png'
     url = settings.PEOPLE_WS_ENDPOINT.format(request.user.sciper)
