@@ -59,7 +59,6 @@ class Person(AbstractUser):
     # def set_managed_institutes(self, value):
     #     self._managed_institutes = json.dumps(value)
 
-    picture_url = URLOrRelativeURLField(blank=True, null=True, default=None)
     delegates = models.ManyToManyField("self", symmetrical=False, blank=True, null=True, default=None)
 
     _is_prof = models.BooleanField(null=False, blank=False, default=False)
