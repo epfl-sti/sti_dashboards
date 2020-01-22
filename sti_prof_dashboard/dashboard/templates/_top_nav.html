@@ -22,10 +22,10 @@
 <nav class="nav-lang nav-lang-short ml-auto">
     <div class="avatar-teaser">
         <div style="padding-right: 10px">
-            <img src="{% static 'dashboard/img/sti_logo.png'%}" alt="Logo EPFL, École polytechnique fédérale de Lausanne">
+            <img src="{% static 'dashboard/img/sti_logo.png'%}" alt="Logo STI, EPFL school of engineering">
         </div>
         <a class="avatar-teaser-img-placeholder" href="https://people.epfl.ch/{{ request.user.sciper }}" target="_blank">
-            <img src="{{ PHOTO_URL }}" style="border-radius: 50%; height: auto; width: auto; max-width: 50px; max-height:50px">
+            <div style="background-image: url('{{ PHOTO_URL }}'); width: 50px; height: 50px; background-size: cover; background-position: top center; border-radius: 50%;"></div>
         </a>
         <div class="avatar-teaser-body">
             <p>{{ request.user.last_name }}, {{ request.user.first_name|truncatewords:1 }}</p>
