@@ -1,5 +1,6 @@
 import requests
 from django.conf import settings
+from django.core.cache import cache
 from ldap3 import ALL, LEVEL, Connection, Server
 
 
@@ -20,6 +21,12 @@ def get_photo_url(request):
     """
     Queries the EPFL People web service to return the url of the currently logged in user's picture
     """
+    cache_key = "photo_url_{}".format(request.user.sciper)
+
+    cached_value = cache.get(cache_key)
+    if cached_value:
+        return cached_value
+
     return_value = '/static/dashboard/img/user.png'
     url = settings.PEOPLE_WS_ENDPOINT.format(request.user.sciper)
     r = requests.get(url)
@@ -30,4 +37,5 @@ def get_photo_url(request):
             photo_url = data[str(request.user.sciper)]['people']['photo_url']
             return_value = photo_url
 
+    cache.set(cache_key, return_value, 600)
     return {'PHOTO_URL': return_value}
