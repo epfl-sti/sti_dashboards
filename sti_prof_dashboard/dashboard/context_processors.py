@@ -34,7 +34,12 @@ def get_photo_url(request):
     if r.status_code == 200:
         try:
             data = r.json()
-            photo_should_be_displayed = bool(int(data[str(request.user.sciper)]['people']['photo_show']))
+            photo_should_be_displayed = True
+            try:
+                photo_should_be_displayed = bool(int(data[str(request.user.sciper)]['people']['photo_show']))
+            except KeyError:
+                pass
+
             if photo_should_be_displayed:
                 photo_url = data[str(request.user.sciper)]['people']['photo_url']
                 return_value = photo_url
