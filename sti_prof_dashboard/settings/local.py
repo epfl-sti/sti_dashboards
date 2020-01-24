@@ -1,7 +1,8 @@
 import os
 
 from .base import *
-
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 DEBUG = True
 
 # Database
@@ -29,3 +30,5 @@ INSTALLED_APPS += ['debug_toolbar', ]
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
 
 TABLEAU_BASE_URL = "https://tableau-tst.epfl.ch/trusted/"
+
+PEOPLE_WS_ENDPOINT = 'https://test-people.epfl.ch/cgi-bin/wsgetpeople?scipers={}'

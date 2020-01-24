@@ -148,5 +148,3 @@ APP_BASE_URL = os.environ.get('DJANGO_APP_BASE_URL', 'https://localhost')
 
 
 STI_INSTITUTES = ['IBI-STI', 'IEL', 'IGM', 'IMT', 'IMX']
-
-PEOPLE_WS_ENDPOINT = 'https://people.epfl.ch/cgi-bin/wsgetpeople?scipers={}'

@@ -41,3 +41,5 @@ sentry_sdk.init(
     send_default_pii=True,
     environment="staging",
 )
+
+PEOPLE_WS_ENDPOINT = 'https://test-people.epfl.ch/cgi-bin/wsgetpeople?scipers={}'

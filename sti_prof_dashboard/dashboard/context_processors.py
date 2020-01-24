@@ -2,6 +2,7 @@ import requests
 from django.conf import settings
 from django.core.cache import cache
 from ldap3 import ALL, LEVEL, Connection, Server
+from sentry_sdk import capture_exception, configure_scope
 
 
 def get_institutes(request):
@@ -31,11 +32,14 @@ def get_photo_url(request):
     url = settings.PEOPLE_WS_ENDPOINT.format(request.user.sciper)
     r = requests.get(url)
     if r.status_code == 200:
-        data = r.json()
-        photo_should_be_displayed = bool(int(data[str(request.user.sciper)]['people']['photo_show']))
-        if photo_should_be_displayed:
-            photo_url = data[str(request.user.sciper)]['people']['photo_url']
-            return_value = photo_url
+        try:
+            data = r.json()
+            photo_should_be_displayed = bool(int(data[str(request.user.sciper)]['people']['photo_show']))
+            if photo_should_be_displayed:
+                photo_url = data[str(request.user.sciper)]['people']['photo_url']
+                return_value = photo_url
+        except Exception as e:
+            capture_exception(e)
 
     cache.set(cache_key, return_value, 600)
     return {'PHOTO_URL': return_value}
