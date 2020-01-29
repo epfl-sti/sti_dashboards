@@ -15,7 +15,7 @@ from epfl.sti.helpers import ldap as epfl_ldap
 @vary_on_cookie
 def index(request):
     context = {
-        'image_relative_path': 'dashboard/img/Double Frame Bridge Sextant - 1798.jpg',
+        'image_relative_path': 'dashboard/img/logo2.jpg',
         'title': 'School of engineering dashboards',
         'details': "You will find information related to your statistics within the school of engineering.",
         }
