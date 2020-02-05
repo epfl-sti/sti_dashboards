@@ -15,7 +15,7 @@ from epfl.sti.helpers import ldap as epfl_ldap
 @vary_on_cookie
 def index(request):
     context = {
-        'image_relative_path': 'dashboard/img/MyCOmpass v1a Frutiger bleu 25pc.jpg',
+        'image_relative_path': 'dashboard/img/myCompass.jpg',
         'title': 'School of Engineering',
         'details': "You will find your statistics within the School of Engineering.",
         }
