@@ -15,9 +15,9 @@ from epfl.sti.helpers import ldap as epfl_ldap
 @vary_on_cookie
 def index(request):
     context = {
-        'image_relative_path': 'dashboard/img/absolutvision-uCMKx2H1Y38-unsplash.jpg',
-        'title': 'School of engineering dashboards',
-        'details': "You will find information related to your statistics within the school of engineering.",
+        'image_relative_path': 'dashboard/img/MyCOmpass v1 Frutiger bleu 25pc.jpg',
+        'title': 'School of Engineering',
+        'details': "You will find your statistics within the School of Engineering.",
         }
     response = render(request, 'generic_section_page.html', context=context)
     patch_cache_control(response, private=True)
