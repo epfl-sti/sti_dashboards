@@ -43,6 +43,10 @@ def get_photo_url(request):
             if photo_should_be_displayed:
                 photo_url = data[str(request.user.sciper)]['people']['photo_url']
                 return_value = photo_url
+        except KeyError:
+            # There is no indication if the photo should be displayed (it was assumed that it should be) but the value of the URL was not passed
+            # Since we do not have the information, we'll keep on using the default one
+            pass
         except Exception as e:
             capture_exception(e)
 
