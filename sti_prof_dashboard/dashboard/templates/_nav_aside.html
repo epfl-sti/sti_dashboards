@@ -30,16 +30,16 @@
                 <li><a>Faculty (associate-deans)</a>
                     <ul>
                         {% get_category_flag "associate-dean" None "teaching" as display_category_flag %}
-                        {% if display_category_flag %}<li><a  href="{% url 'dashboard:faculty_view' 'associate-deans' 'teaching' %}">Teaching</a></li>{% endif %}
+                        {% if display_category_flag %}<li><a  href="{% url 'dashboard:faculty_view' 'associate-dean' 'teaching' %}">Teaching</a></li>{% endif %}
 
                         {% get_category_flag "associate-dean" None "finance" as display_category_flag %}
-                        {% if display_category_flag %}<li><a href="{% url 'dashboard:faculty_view' 'associate-deans' 'finance' %}">Finance</a></li>{% endif %}
+                        {% if display_category_flag %}<li><a href="{% url 'dashboard:faculty_view' 'associate-dean' 'finance' %}">Finance</a></li>{% endif %}
 
                         {% get_category_flag "associate-dean" None "hr" as display_category_flag %}
-                        {% if display_category_flag %}<li><a href="{% url 'dashboard:faculty_view' 'associate-deans' 'hr' %}">Human Resources</a></li>{% endif %}
+                        {% if display_category_flag %}<li><a href="{% url 'dashboard:faculty_view' 'associate-dean' 'hr' %}">Human Resources</a></li>{% endif %}
 
                         {% get_category_flag "associate-dean" None "space" as display_category_flag %}
-                        {% if display_category_flag %}<li><a href="{% url 'dashboard:faculty_view' 'associate-deans' 'space' %}">Space</a></li>{% endif %}
+                        {% if display_category_flag %}<li><a href="{% url 'dashboard:faculty_view' 'associate-dean' 'space' %}">Space</a></li>{% endif %}
                     </ul>
                 </li>
             {% endif %}

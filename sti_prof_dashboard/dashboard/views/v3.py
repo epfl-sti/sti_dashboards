@@ -21,7 +21,10 @@ def generic_faculty(request, *args, **kwargs):
     category = kwargs.get('category', '')
     subcategory = kwargs.get('subcategory', '')
 
-    is_authorized = auth.is_authorized(sciper=request.user.sciper, section=level, category=category)
+    if role != '':
+        is_authorized = auth.is_authorized(sciper=request.user.sciper, section=role, category=category)
+    else:
+        is_authorized = auth.is_authorized(sciper=request.user.sciper, section=level, category=category)
     if not is_authorized:
         raise PermissionDenied()
 
