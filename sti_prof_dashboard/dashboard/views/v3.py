@@ -1,11 +1,13 @@
 from django.conf import settings
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.decorators.cache import cache_control, cache_page, patch_cache_control
+from django.views.decorators.cache import (cache_control, cache_page,
+                                           patch_cache_control)
 from django.views.decorators.vary import vary_on_cookie
-from django.core.exceptions import PermissionDenied
 
+from dashboard.helpers import mykompas_authorizations as auth
 from dashboard.models import NextStep, Person
 from epfl.sti.helpers import ldap as epfl_ldap
 
@@ -14,13 +16,15 @@ from epfl.sti.helpers import ldap as epfl_ldap
 @cache_control(max_age=3600)
 @vary_on_cookie
 def generic_faculty(request, *args, **kwargs):
-    if not request.user.get_is_dean() and not request.user.get_is_associate_dean():
-        raise PermissionDenied()
-
     level = 'faculty'
     role = kwargs.get('role', '')
     category = kwargs.get('category', '')
     subcategory = kwargs.get('subcategory', '')
+
+    is_authorized = auth.is_authorized(sciper=request.user.sciper, section=level, category=category)
+    if not is_authorized:
+        raise PermissionDenied()
+
     context = {
         'tableau_base_url': settings.TABLEAU_BASE_URL,
         'level': level,
@@ -49,13 +53,8 @@ def generic_institute(request, *args, **kwargs):
     category = kwargs.get('category', '')
     subcategory = kwargs.get('subcategory', '')
 
-    # authorizations (this comes after the arguments retrieval because we need to know the institute)
-    is_allowed = False
-    if request.user.get_is_dean() or request.user.get_is_associate_dean():
-        is_allowed = True
-    if institute in request.user.get_managed_institutes():
-        is_allowed = True
-    if not is_allowed:
+    is_authorized = auth.is_authorized(sciper=request.user.sciper,section=level, sub_section=institute,category=category)
+    if not is_authorized:
         raise PermissionDenied()
 
     context = {
@@ -85,20 +84,12 @@ def generic_personal(request, *args, **kwargs):
     category = kwargs.get('category', '')
     subcategory = kwargs.get('subcategory', '')
 
-    # authorizations (this comes after the arguments retrieval because we need to know the institute)
-    is_allowed = False
-    if request.user.get_is_dean() or request.user.get_is_associate_dean():
-        is_allowed = True
-    if not is_allowed:
-        accessed_person = Person.objects.get(sciper=sciper)
+    is_authorized = auth.is_authorized(sciper=request.user.sciper, section=level,category=category)
+    if not is_authorized:
+        raise PermissionDenied()
 
-        delegations = accessed_person.get_prof_delegations()
-        for delegation in delegations:
-            if request.user.sciper == delegation['sciper']:
-                is_allowed = True
-                break
-
-    if not is_allowed:
+    # prevent users to access other people information
+    if sciper != str(request.user.sciper):
         raise PermissionDenied()
 
     institute = epfl_ldap.get_institute(sciper, official_institutes=settings.STI_INSTITUTES)

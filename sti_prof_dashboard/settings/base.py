@@ -94,6 +94,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'dashboard.context_processors.get_institutes',
                 'dashboard.context_processors.get_photo_url',
+                'dashboard.context_processors.get_menu_entries',
             ],
         },
     },

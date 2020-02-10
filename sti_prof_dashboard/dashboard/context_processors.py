@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.cache import cache
 from ldap3 import ALL, LEVEL, Connection, Server
 from sentry_sdk import capture_exception, configure_scope
+from dashboard.helpers.menu import build_menu_display_dict
 
 
 def get_institutes(request):
@@ -52,3 +53,15 @@ def get_photo_url(request):
 
     cache.set(cache_key, return_value, 600)
     return {'PHOTO_URL': return_value}
+
+
+def get_menu_entries(request):
+    cache_key = "mykompass_{}_menu_entries"
+    cached_value = cache.get(cache_key)
+    if cached_value:
+        return {'MENU_ENTRIES': cached_value}
+
+    menu_entries = build_menu_display_dict(request.user.sciper)
+
+    cache.set(cache_key, menu_entries, 86400)
+    return {'MENU_ENTRIES': menu_entries}
