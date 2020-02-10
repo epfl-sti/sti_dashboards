@@ -56,7 +56,7 @@ def get_photo_url(request):
 
 
 def get_menu_entries(request):
-    cache_key = "mykompass_{}_menu_entries"
+    cache_key = "mykompass_{}_menu_entries".format(request.user.sciper)
     cached_value = cache.get(cache_key)
     if cached_value:
         return {'MENU_ENTRIES': cached_value}
