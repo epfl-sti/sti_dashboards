@@ -12,9 +12,9 @@ from dashboard.models import NextStep, Person
 from epfl.sti.helpers import ldap as epfl_ldap
 
 
-@cache_page(60 * 15)
-@cache_control(max_age=3600)
-@vary_on_cookie
+# @cache_page(60 * 15)
+# @cache_control(max_age=3600)
+# @vary_on_cookie
 def generic_faculty(request, *args, **kwargs):
     level = 'faculty'
     role = kwargs.get('role', '')
@@ -44,9 +44,9 @@ def generic_faculty(request, *args, **kwargs):
     return response
 
 
-@cache_page(60 * 15)
-@cache_control(max_age=3600)
-@vary_on_cookie
+# @cache_page(60 * 15)
+# @cache_control(max_age=3600)
+# @vary_on_cookie
 def generic_institute(request, *args, **kwargs):
     level = 'institute'
     institute = kwargs.get('institute', '')
@@ -75,9 +75,9 @@ def generic_institute(request, *args, **kwargs):
     return response
 
 
-@cache_page(60 * 15)
-@cache_control(max_age=3600)
-@vary_on_cookie
+# @cache_page(60 * 15)
+# @cache_control(max_age=3600)
+# @vary_on_cookie
 def generic_personal(request, *args, **kwargs):
     level = 'personal'
     sciper = kwargs.get('sciper', '')
