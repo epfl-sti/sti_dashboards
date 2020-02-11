@@ -125,7 +125,7 @@ def is_authorized(sciper=None, section=None, sub_section=None, category=None):
         authorized_groups.append('{}rrh'.format(group_name_base))
     elif section == 'faculty' and category == 'space':
         authorized_groups.append('{}dean'.format(group_name_base))
-        authorized_groups.append('{}_r_infrastructures'.format(group_name_base))
+        authorized_groups.append('{}r_infrastructures'.format(group_name_base))
 
     elif section == 'associate-dean' and category == 'teaching':
         authorized_groups.append('{}associate_dean'.format(group_name_base))
