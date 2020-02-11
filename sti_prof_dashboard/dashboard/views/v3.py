@@ -21,7 +21,9 @@ def generic_faculty(request, *args, **kwargs):
     category = kwargs.get('category', '')
     subcategory = kwargs.get('subcategory', '')
 
-    if role != '':
+    if role == 'dean':
+        is_authorized = auth.is_authorized(sciper=request.user.sciper, section=level, category=category)
+    elif role == "associate-dean":
         is_authorized = auth.is_authorized(sciper=request.user.sciper, section=role, category=category)
     else:
         is_authorized = auth.is_authorized(sciper=request.user.sciper, section=level, category=category)
