@@ -40,7 +40,7 @@ function initViz_summary(tokenURI, vizWidth) {
                 width: vizWidth + 'px',
                 height: '2000px',
                 'Institute': '{{ institute }}',
-                "sciper": '{{ sciper }}',
+                "Unit's manager ID": '{{ sciper }}',
                 };
             let viz = new tableau.Viz(containerDiv.the(), url, options);
             resolve("sucessfully created vizualization");
@@ -63,7 +63,7 @@ function initViz_details(tokenURI, vizWidth) {
                 width: vizWidth + 'px',
                 height: '2000px',
                 'Institute': '{{ institute }}',
-                "sciper": '{{ sciper }}',
+                "Unit's manager ID": '{{ sciper }}',
                 };
             let viz = new tableau.Viz(containerDiv.the(), url, options);
             resolve("sucessfully created vizualization");
