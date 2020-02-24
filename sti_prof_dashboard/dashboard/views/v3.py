@@ -58,7 +58,7 @@ def generic_institute(request, *args, **kwargs):
     category = kwargs.get('category', '')
     subcategory = kwargs.get('subcategory', '')
 
-    is_authorized = auth.is_authorized(sciper=request.user.sciper,section=level, sub_section=institute,category=category)
+    is_authorized = auth.is_authorized(sciper=request.user.sciper, section=level, sub_section=institute, category=category)
     if not is_authorized:
         raise PermissionDenied()
 
@@ -89,7 +89,7 @@ def generic_personal(request, *args, **kwargs):
     category = kwargs.get('category', '')
     subcategory = kwargs.get('subcategory', '')
 
-    is_authorized = auth.is_authorized(sciper=request.user.sciper, section=level,category=category)
+    is_authorized = auth.is_authorized(sciper=request.user.sciper, section=level, category=category)
     if not is_authorized:
         raise PermissionDenied()
 
