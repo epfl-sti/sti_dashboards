@@ -30,5 +30,8 @@
         <div class="avatar-teaser-body">
             <p>{{ request.user.last_name }}, {{ request.user.first_name|truncatewords:1 }}</p>
         </div>
+        <div>
+            <a class="btn btn-primary btn-sm" href="{% url 'logout' %}">logout</a>
+        </div>
     </div>
 </nav>
